@@ -1,5 +1,5 @@
 <!-- # <p align="center">Staterpack Auth bootstrap UI laravel 8</p> -->
-![alt text](https://github.com/muhamadijlal/MPE-x-Sangkuriang/tree/main/public/assets/images/mpe/logo-mini.png)
+<img src="/public/assets/images/mpe/logo.png" alt="Alt text" title="Optional title">
 ## Description
 Collaborative project between MPE (Mitra Pratama Engineering) X Sangkuriang vendor. Build a bookkeeping system to make it easier to create transaction reports and analyze expenses and income transparently.
 
@@ -8,11 +8,8 @@ Time efficiency in making transaction reports, transparent, and organized in boo
 
 ## Feature
 | transaction management |
-| ------------- |
 | spare parts management |
-| ------------- |
 | bookkeeping |
-| ------------- |
 | service management |
 
 ## License
