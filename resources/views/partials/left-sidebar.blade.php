@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
           <i class="icon-grid menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
@@ -14,9 +14,11 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Sparepart</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Transaksi</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Jasa</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.sparepart.index') }}">Sparepart</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.transaksi.index') }}">Transaksi</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.jasa.index') }}">Jasa</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.role.index') }}">Role</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.karyawan.index') }}">Karyawan</a></li>
           </ul>
         </div>
       </li>
