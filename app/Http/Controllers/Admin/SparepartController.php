@@ -12,6 +12,21 @@ class SparepartController extends Controller
         return view('layouts.admin.spareparts.index');
     }
 
+    public function datatable(){
+        $collection = Sparepart::all();
+        return datatables()
+                ->of($collection)
+                ->addColumn('','')
+                ->addColumn('aksi', function($row){
+                    return 'test';
+                })
+                ->rawColumns([
+                    '',
+                    'aksi'
+                ])
+                ->make(true);
+    }
+
     public function create(){
         return view('layouts.admin.spareparts.create');
     }

@@ -2,7 +2,7 @@
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
 @endpush
 
 @section('content')
@@ -27,17 +27,17 @@
                     Tambah Sparepart
                 </a>
             </div>
-            <table class="table table-striped"  id="myTable">
+            <table class="table table-striped" id="myTable" width="100%">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>Nama</th>
                         <th>Merek</th>
                         <th>Type</th>
                         <th>Qty</th>
                         <th>Satuan</th>
                         <th>Harga</th>
-                        <th>#</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -49,19 +49,44 @@
 
 @push('js')
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
 <script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
+$(document).ready( function () {
+    $('#myTable').DataTable({
+        processing: true,
+        serverside: true,
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [{
+            className: 'dtr-control',
+            orderable: false,
+            targets: 0
+        }],
+        ajax: {
+            url: "{{ route('admin.sparepart.datatable') }}",
+            type: 'GET',
+            // headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            // }
+        },
+        columns: [
+            {data: '', name: ''},
+            {data: 'nama', name: 'nama'},
+            {data: 'merek', name: 'merek'},
+            {data: 'type', name: 'type'},
+            {data: 'qty', name: 'qty'},
+            {data: 'satuan', name: 'satuan'},
+            {data: 'harga', name: 'harga'},
+            {data: 'aksi', name: 'aksi'},
+        ]
     });
+});
 </script>
 @endpush

@@ -33,6 +33,7 @@ Route::group([
 ], function(){
     // Sparepart route write here
     Route::get('/sparepart','index')->name('index');
+    Route::get('/sparepart/datatable','datatable')->name('datatable');
     Route::get('/sparepart/create','create')->name('create');
     Route::post('/sparepart/store','store')->name('store');
     Route::get('/sparepart/edit','edit')->name('edit');
