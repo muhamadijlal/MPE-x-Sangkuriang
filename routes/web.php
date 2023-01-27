@@ -61,9 +61,12 @@ Route::group([
 ], function(){
     // jasa route write here
     Route::get('/jasa','index')->name('index');
+    Route::get('/jasa/datatable','datatable')->name('datatable');
     Route::get('/jasa/create','create')->name('create');
     Route::post('/jasa','store')->name('store');
-    Route::get('/jasa/edit','edit')->name('edit');
+    Route::get('/jasa/edit/{id}','edit')->name('edit');
+    Route::put('/jasa/update/{id}','update')->name('update');
+    Route::get('/jasa/delete/{id}','destroy')->name('destroy');
 });
 
 Route::group([
