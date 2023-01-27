@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/','/admin/dashboard');
+
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'controller' => DashboardController::class,
@@ -31,8 +33,12 @@ Route::group([
 ], function(){
     // Sparepart route write here
     Route::get('/sparepart','index')->name('index');
+    Route::get('/sparepart/datatable','datatable')->name('datatable');
     Route::get('/sparepart/create','create')->name('create');
-    Route::get('/sparepart/edit','edit')->name('edit');
+    Route::post('/sparepart/store','store')->name('store');
+    Route::get('/sparepart/edit/{id}','edit')->name('edit');
+    Route::put('/sparepart/update/{id}','update')->name('update');
+    Route::get('/sparepart/delete/{id}','destroy')->name('destroy');
 });
 
 Route::group([
@@ -68,7 +74,8 @@ Route::group([
 ], function(){
     // role route write here
     Route::get('/role','index')->name('index');
-    Route::get('/role/create','create')->name('create');
+    Route::post('/role/store','store')->name('store');
+    Route::get('/role/destroy/{id}','destroy')->name('destroy');
 });
 
 Route::group([
