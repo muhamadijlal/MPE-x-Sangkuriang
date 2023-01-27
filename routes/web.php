@@ -73,7 +73,8 @@ Route::group([
 ], function(){
     // role route write here
     Route::get('/role','index')->name('index');
-    Route::get('/role/create','create')->name('create');
+    Route::post('/role/store','store')->name('store');
+    Route::get('/role/destroy/{id}','destroy')->name('destroy');
 });
 
 Route::group([

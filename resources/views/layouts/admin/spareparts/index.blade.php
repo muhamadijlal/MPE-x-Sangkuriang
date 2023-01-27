@@ -57,17 +57,17 @@
 <script>
 function confirmDelete(data_id) {
     swal({
-        title: "Delete Report ?",
-        text: "Data "+ data_id +" will deleted!",
+        title: "Anda yakin ingin menghapus ?",
+        text: "Sparepart "+ data_id +" akan dihapus secara permanen!",
         icon: "warning",
         buttons: true,  
         dangerMode: true,
     })
     .then((willDelete) => {
         if (willDelete) {
-        window.location.href = ("/admin/sparepart/delete/"+data_id);
+            window.location.href = ("/admin/sparepart/delete/"+data_id);
         } else {
-        swal("Deleting Canceled");
+            swal("Proses hapus dibatalkan!");
         }
     });
 }
