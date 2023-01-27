@@ -56,6 +56,7 @@ Route::group([
     // jasa route write here
     Route::get('/jasa','index')->name('index');
     Route::get('/jasa/create','create')->name('create');
+    Route::post('/jasa','store')->name('store');
     Route::get('/jasa/edit','edit')->name('edit');
 });
 
