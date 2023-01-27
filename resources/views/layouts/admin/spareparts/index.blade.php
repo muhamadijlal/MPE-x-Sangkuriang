@@ -55,17 +55,17 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-function confirmDelete(data_id) {
+function confirmDelete(id) {
     swal({
         title: "Anda yakin ingin menghapus ?",
-        text: "Sparepart "+ data_id +" akan dihapus secara permanen!",
+        text: "Sparepart akan dihapus secara permanen!",
         icon: "warning",
         buttons: true,  
         dangerMode: true,
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.location.href = ("/admin/sparepart/delete/"+data_id);
+            window.location.href = ("/admin/sparepart/delete/"+id);
         } else {
             swal("Proses hapus dibatalkan!");
         }

@@ -12,7 +12,7 @@ class Karyawan extends Model
     protected $table = 'karyawan';
     protected $guarded = ['id'];
 
-    // protected function role(){
-    //     $this->belongsTo(Role::class,'id');
-    // }
+    protected function role(){
+        return $this->belongsTo(Role::class,'role_id');
+    }
 }

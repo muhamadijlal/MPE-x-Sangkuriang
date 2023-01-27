@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use ReturnTypeWillChange;
 
 class Role extends Model
 {
@@ -11,4 +12,8 @@ class Role extends Model
 
     protected $table = 'role';
     protected $guarded = ['id'];
+
+    protected function karyawan(){
+        return $this->hasMany(Karyawan::class, 'id');
+    }
 }

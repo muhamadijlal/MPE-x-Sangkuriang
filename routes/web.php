@@ -85,6 +85,10 @@ Route::group([
 ], function(){
     // karyawan route write here
     Route::get('/karyawan','index')->name('index');
+    Route::get('/karyawan/datatable','datatable')->name('datatable');
     Route::get('/karyawan/create','create')->name('create');
-    Route::get('/karyawan/edit','edit')->name('edit');
+    Route::post('/karyawan/store','store')->name('store');
+    Route::get('/karyawan/edit/{id}','edit')->name('edit');
+    Route::put('/karyawan/update/{id}','update')->name('update');
+    Route::get('/karyawan/delete/{id}','destroy')->name('destroy');
 });

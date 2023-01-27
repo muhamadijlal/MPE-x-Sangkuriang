@@ -14,7 +14,7 @@ class KaryawanFactory extends Factory
     public function definition()
     {
         return [
-            'role_id' => $this->faker->randomNumber(1,2),
+            'role_id' => $this->faker->randomElement([1,2]),
             'nama' => $this->faker->name('male'),
             'alamat' => $this->faker->address(),
             'telepon' => $this->faker->e164PhoneNumber(),
