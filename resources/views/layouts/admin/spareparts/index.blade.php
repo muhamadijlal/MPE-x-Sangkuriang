@@ -53,7 +53,25 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function confirmDelete(data_id) {
+    swal({
+        title: "Delete Report ?",
+        text: "Data "+ data_id +" will deleted!",
+        icon: "warning",
+        buttons: true,  
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+        window.location.href = ("/admin/sparepart/delete/"+data_id);
+        } else {
+        swal("Deleting Canceled");
+        }
+    });
+}
+</script>
 <script>
 $(document).ready( function () {
     $('#myTable').DataTable({

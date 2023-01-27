@@ -36,7 +36,9 @@ Route::group([
     Route::get('/sparepart/datatable','datatable')->name('datatable');
     Route::get('/sparepart/create','create')->name('create');
     Route::post('/sparepart/store','store')->name('store');
-    Route::get('/sparepart/edit','edit')->name('edit');
+    Route::get('/sparepart/edit/{id}','edit')->name('edit');
+    Route::put('/sparepart/update/{id}','update')->name('update');
+    Route::get('/sparepart/delete/{id}','destroy')->name('destroy');
 });
 
 Route::group([

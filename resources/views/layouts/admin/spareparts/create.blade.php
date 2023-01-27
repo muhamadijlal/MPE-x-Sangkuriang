@@ -11,7 +11,7 @@
                   <label for="nama">Nama Sparepart</label>
                   <input name="nama" type="text" class="form-control @error('nama')
                     is-invalid
-                  @enderror" id="nama" placeholder="Input Nama Sparepart" autocomplete="off">
+                  @enderror" id="nama" placeholder="Input Nama Sparepart" autocomplete="off" value="{{ old('nama') }}">
                   @error('nama')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -22,7 +22,7 @@
                   <label for="merek">Merek Sparepart</label>
                   <input name="merek" type="text" class="form-control @error('merek')
                     is-invalid
-                  @enderror" id="merek" placeholder="Input Merek Sparepart" autocomplete="off">
+                  @enderror" id="merek" placeholder="Input Merek Sparepart" autocomplete="off" value="{{ old('merek') }}">
                   @error('merek')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -35,7 +35,7 @@
                       <label for="type">Type Sparepart</label>
                       <input name="type" type="text" class="form-control @error('type')
                         is-invalid
-                      @enderror" id="type" placeholder="Input Jenis Sparepart" autocomplete="off">
+                      @enderror" id="type" placeholder="Input Jenis Sparepart" autocomplete="off" value="{{ old('type') }}">
                       @error('type')
                         <div class="invalid-feedback">
                           {{ $message }}
@@ -48,7 +48,7 @@
                       <label for="satuan">Satuan Sparepart</label>
                       <input name="satuan" type="text" class="form-control @error('satuan')
                         is-invalid
-                      @enderror" id="satuan" placeholder="Contoh: Lot/Pcs/Unit" autocomplete="off">
+                      @enderror" id="satuan" placeholder="Contoh: Lot/Pcs/Unit" autocomplete="off" value="{{ old('satuan') }}">
                       @error('satuan')
                         <div class="invalid-feedback">
                           {{ $message }}
@@ -63,7 +63,7 @@
                       <label for="qty">Qty</label>
                       <input name="qty" type="number" class="form-control @error('qty')
                         is-invalid
-                      @enderror" id="qty" placeholder="Input Jumlah Sparepart" autocomplete="off">
+                      @enderror" id="qty" placeholder="Input Jumlah Sparepart" autocomplete="off" value="{{ old('qty') }}">
                       @error('qty')
                         <div class="invalid-feedback">
                           {{ $message }}
@@ -76,7 +76,7 @@
                       <label for="harga">Harga Satuan</label>
                       <input name="harga" type="number" class="form-control @error('harga')
                         is-invalid
-                      @enderror" id="harga" placeholder="Input Harga Sparepart" autocomplete="off">
+                      @enderror" id="harga" placeholder="Input Harga Sparepart" autocomplete="off" value="{{ old('harga') }}">
                       @error('harga')
                         <div class="invalid-feedback">
                           {{ $message }}
