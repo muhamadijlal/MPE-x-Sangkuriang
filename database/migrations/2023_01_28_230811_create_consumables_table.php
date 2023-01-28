@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateConsumablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
+        Schema::create('consumable', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis');
-            $table->tinyInteger('upah');
-            $table->longText('keterangan');
+            $table->foreignId('transaksi_id');
+            $table->string('nama');
+            $table->tinyInteger('qty');
+            $table->string('satuan');
+            $table->integer('harga');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role');
+        Schema::dropIfExists('consumable');
     }
 }

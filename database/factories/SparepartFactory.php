@@ -25,8 +25,8 @@ class SparepartFactory extends Factory
             'merek' => $this->faker->randomElement($merek),
             'type' => $this->faker->randomElement($type),
             'satuan' => $this->faker->randomElement(['lot','unit','pcs']),
-            'qty' => $this->faker->randomDigit(),
-            'harga' => $this->faker->numberBetween(100000, 100000000)
+            'qty' => $this->faker->numberBetween(1,99),
+            'harga' => $this->faker->numberBetween(999999, 999999999)
         ];
     }
 }

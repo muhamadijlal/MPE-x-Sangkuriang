@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sparepart extends Model
+class Consumable extends Model
 {
     use HasFactory;
-    protected $table = 'sparepart';
+
+    protected $table = 'consumable';
     protected $guarded = ['id'];
 
-    protected function t_sparepart(){
-        return $this->belongsTo(T_sparepart::class, 'id');
+    protected function transaksi(){
+        return $this->belongsTo(Transaksi::class, 'transaksi_id');
     }
 }

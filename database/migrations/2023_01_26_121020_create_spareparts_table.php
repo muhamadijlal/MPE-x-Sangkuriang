@@ -19,7 +19,7 @@ class CreateSparepartsTable extends Migration
             $table->string('merek');
             $table->string('type')->nullable();
             $table->string('satuan');
-            $table->integer('qty');
+            $table->tinyInteger('qty');
             $table->integer('harga');
             $table->timestamps();
         });

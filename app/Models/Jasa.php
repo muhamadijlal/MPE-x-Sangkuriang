@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sparepart extends Model
+class Jasa extends Model
 {
     use HasFactory;
-    protected $table = 'sparepart';
+
+    protected $table = 'jasa';
     protected $guarded = ['id'];
 
-    protected function t_sparepart(){
-        return $this->belongsTo(T_sparepart::class, 'id');
+    protected function t_jasa(){
+        return $this->belongsTo(T_jasa::class, 'id');
     }
 }

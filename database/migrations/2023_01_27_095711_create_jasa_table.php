@@ -17,6 +17,8 @@ class CreateJasaTable extends Migration
             $table->id();
             $table->string('nama');
             $table->longText('deskripsi');
+            $table->tinyInteger('qty');
+            $table->string('satuan');
             $table->integer('harga');
             $table->timestamps();
         });

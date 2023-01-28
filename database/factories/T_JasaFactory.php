@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoleFactory extends Factory
+class T_JasaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,8 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'jenis' => $this->faker->randomElement(['helper','teknisi']),
-            'upah' => $this->faker->numberBetween(10,99),
-            'keterangan' => $this->faker->sentence(12, true),
+            'transaksi_id' => $this->faker->numberBetween(1, 500),
+            'jasa_id' => $this->faker->numberBetween(1,10)
         ];
     }
 }
