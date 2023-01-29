@@ -27,7 +27,7 @@ class TransaksiFactory extends Factory
 
         $status_pengerjaan = ['proses','po','selesai'];
 
-        $status_pembayaran = ['belum_bayar','dp','lunas'];
+        $status_pembayaran = ['belum bayar','dp','lunas'];
 
         return [
             'nama' => $this->faker->randomElement($pt),

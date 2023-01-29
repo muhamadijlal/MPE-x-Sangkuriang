@@ -20,7 +20,7 @@ class CreateTransaksisTable extends Migration
             $table->string('lokasi');
             $table->integer('total_harga');
             $table->enum('status_pengerjaan',['proses','po','selesai']);
-            $table->enum('status_pembayaran',['belum_bayar','dp','lunas']);
+            $table->enum('status_pembayaran',['belum bayar','dp','lunas']);
             $table->string('perihal');
             $table->date('tanggal');
             $table->timestamps();

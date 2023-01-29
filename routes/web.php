@@ -49,6 +49,7 @@ Route::group([
 ], function(){
     // transaksi route write here
     Route::get('/transaksi','index')->name('index');
+    Route::get('/transaksi/datatable','datatable')->name('datatable');
     Route::get('/transaksi/create','create')->name('create');
     Route::get('/transaksi/edit','edit')->name('edit');
 });
