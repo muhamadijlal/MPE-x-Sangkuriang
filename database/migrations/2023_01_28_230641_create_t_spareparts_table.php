@@ -17,6 +17,7 @@ class CreateTSparepartsTable extends Migration
             $table->id();
             $table->foreignId('transaksi_id');
             $table->foreignId('sparepart_id');
+            $table->tinyInteger('qty');
             $table->timestamps();
         });
     }

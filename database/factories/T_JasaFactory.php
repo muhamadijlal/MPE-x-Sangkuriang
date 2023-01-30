@@ -15,7 +15,8 @@ class T_JasaFactory extends Factory
     {
         return [
             'transaksi_id' => $this->faker->numberBetween(1, 500),
-            'jasa_id' => $this->faker->numberBetween(1,10)
+            'jasa_id' => $this->faker->numberBetween(1,10),
+            'qty' => $this->faker->numberBetween(1,10)
         ];
     }
 }

@@ -16,6 +16,7 @@ class T_SparepartFactory extends Factory
         return [
             'transaksi_id' =>$this->faker->numberBetween(5,500),
             'sparepart_id' =>$this->faker->numberBetween(1,10),
+            'qty' =>$this->faker->numberBetween(1,10),
         ];
     }
 }

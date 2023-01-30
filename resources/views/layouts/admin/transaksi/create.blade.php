@@ -1,11 +1,14 @@
 @extends('master')
 
+@push('css')
+@endpush
+
 @section('content')
 <div class="col-lg-12">
     <div class="card p-4">
         <div class="card-body">
             <h4 class="card-title">Form tambah transaksi</h4>
-            <form class="forms-sample mt-5" action="#" method="#">
+            <form class="forms-sample mt-5" action="{{ route('admin.transaksi.store') }}" method="POST">
                 @csrf
                 <small>Client/Customer</small>
                 <div class="border rounded p-4 mb-4">
@@ -13,13 +16,27 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="nama">Nama Perusahaan</label>
-                                <input name="nama" type="text" class="form-control" id="nama" placeholder="Input Nama Perusahaan">
+                                <input name="nama" type="text" class="form-control form-control-sm @error('nama')
+                                    is-invalid
+                                @enderror" id="nama" placeholder="Input Nama Perusahaan" value="{{ old('nama') }}" autocomplete="off">
+                                @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="penanggung_jawab">Penanggung Jawab Perusahaan</label>
-                                <input name="penanggung_jawab" type="text" class="form-control" id="penanggung_jawab" placeholder="Input Nama Penanggung Jawab pihak penyewa jasa">
+                                <input name="penanggung_jawab" type="text" class="form-control form-control-sm @error('penanggung_jawab')
+                                    is-invalid
+                                @enderror" id="penanggung_jawab" placeholder="Input Nama Penanggung Jawab pihak penyewa jasa" value="{{ old('penanggung_jawab') }}" autocomplete="off">
+                                @error('penanggung_jawab')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -27,95 +44,159 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="lokasi">Lokasi Perusahaan</label>
-                                <input name="lokasi" type="text" class="form-control" id="lokasi" placeholder="Input Lokasi Perusahaan">
+                                <input name="lokasi" type="text" class="form-control form-control-sm @error('lokasi')
+                                    is-invalid
+                                @enderror" id="lokasi" placeholder="Input Lokasi Perusahaan" autocomplete="off" value="{{ old('lokasi') }}">
+                                @error('lokasi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="perihal">Perihal</label>
-                                <input name="perihal" type="text" class="form-control" id="perihal" placeholder="Input Perihal">
+                                <label for="tanggal">Tanggal Penawaran</label>
+                                <input name="tanggal" type="date" class="form-control form-control-sm @error('tanggal')
+                                    is-invalid
+                                @enderror" id="tanggal" placeholder="Input Tanggal Penawaran" autocomplete="off" value="{{ old('tanggal') }}">
+                                @error('tanggal')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tanggal">Tanggal Penawaran</label>
-                        <input name="tanggal" type="date" class="form-control" id="tanggal" placeholder="Input Tanggal Penawaran">
+                        <label for="perihal">Perihal</label>
+                        <textarea class="form-control form-control-sm @error('perihal')
+                            is-invalid
+                        @enderror" name="perihal" id="perihal" placeholder="Input perihal"></textarea>
+                        @error('pperihal')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
                 <small>Spareparts</small>
                 <div class="border rounded p-4 mb-4">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <label for="sparepart">Sparepart</label>
-                                <select class="form-control" id="sparepart">
-                                    <option  value="">-- Pilih --</option>
-                                    <option  value="">Sparepart 1</option>
-                                    <option  value="">Sparepart 2</option>
-                                </select>
+                    <div id="inputFieldSparepart">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label for="sparepart">Sparepart</label>
+                                    <select class="form-control form-control-sm @error('sparepart')
+                                        is-invalid
+                                    @enderror" id="sparepart" name="sparepart[]">
+                                        <option value="">--Pilih--</option>
+                                        @foreach ($spareparts as $item)
+                                            <option {{ old('sparepart') == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('sparepart')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="Qty">Qty</label>
-                                <input name="sparepart" type="number" class="form-control" id="sparepart" placeholder="0">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="QtySparepart">Qty Sparepart</label>
+                                    <input name="qtySparepart[]" type="number" class="form-control form-control-sm @error('qtySparepart')
+                                        is-invalid
+                                    @enderror" id="qtySparepart" placeholder="0" autocomplete="off" min=0>
+                                    @error('qtySparepart')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-1 mt-1">
-                            <button type="button" class="btn btn-sm btn-outline-primary">
-                                <i class="ti ti-plus"></i>
-                            </button>
+                            <div class="col-lg-1 mt-1">
+                                <button type="button" id="addFieldSparepart" class="btn btn-sm btn-outline-primary">
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <small>Consumable</small>
                 <div class="border rounded p-4 mb-4">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <label for="consumable">Consumable</label>
-                                <input name="consumable" type="text" class="form-control" id="consumable" placeholder="Input consumable">
+                    <div id="inputFieldConsumable">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label for="consumable">Consumable</label>
+                                    <input name="consumable[]" type="text" class="form-control form-control-sm @error('consumable')
+                                        is-invalid
+                                    @enderror" id="consumable" placeholder="Input consumable">
+                                </div>
+                                @error('consumable')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="Qty">Qty</label>
-                                <input name="sparepart" type="number" class="form-control" id="sparepart" placeholder="0">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="QtyConsumable">Qty Consumable</label>
+                                    <input name="qtyConsumable[]" type="number" class="form-control form-control-sm @error('qtyConsumable')
+                                        is-invalid
+                                    @enderror" id="qtyConsumable" placeholder="0" autocomplete="off" min=0>
+                                    @error('qtyConsumable')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-1 mt-1">
-                            <button type="button" class="btn btn-sm btn-outline-primary">
-                                <i class="ti ti-plus"></i>
-                            </button>
+                            <div class="col-lg-1 mt-1">
+                                <button type="button" id="addFieldConsumable" class="btn btn-sm btn-outline-primary">
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <small>Jasa</small>
                 <div class="border rounded p-4 mb-4">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <label for="jasa">Jasa</label>
-                                <select class="form-control" id="jasa">
-                                    <option  value="">-- Pilih --</option>
-                                    <option  value="">jasa 1</option>
-                                    <option  value="">jasa 2</option>
-                                </select>
+                    <div id="inputFieldJasa">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label for="jasa">Jasa</label>
+                                    <select class="form-control form-control-sm @error('jasa')
+                                        is-invalid
+                                    @enderror" id="jasa" name="jasa[]">
+                                        <option  value="">-- Pilih --</option>
+                                        @foreach ($jasa as $item)
+                                            <option {{ old('jasa') == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jasa')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="Qty">Qty</label>
-                                <input name="sparepart" type="number" class="form-control" id="sparepart" placeholder="0">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="QtyJasa">Qty Jasa</label>
+                                    <input name="qtyJasa[]" type="number" class="form-control form-control-sm" id="qtyJasa" placeholder="0" autocomplete="off" min=0>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-1 mt-1">
-                            <button type="button" class="btn btn-sm btn-outline-primary">
-                                <i class="ti ti-plus"></i>
-                            </button>
+                            <div class="col-lg-1 mt-1">
+                                <button type="button" id="addFieldJasa" class="btn btn-sm btn-outline-primary">
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,3 +210,122 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    // add field
+    $("#addFieldSparepart").click(function () {
+        let html = '';      
+
+        html += '<div class="row align-items-center" id="rowInputAddSparepart">';
+        html += '<div class="col-lg-7">';
+        html += '<div class="form-group">';
+        html += '<label for="sparepart">Sparepart</label>';
+        html += '<select class="form-control form-control-sm" id="sparepart" name="sparepart[]">';
+        html += '<option value="">--Pilih--</option>';
+        html += '@foreach ($spareparts as $item)';
+        html += '<option {{ old("sparepart") == $item->id ? "selected" : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>';
+        html += '@endforeach';  
+        html += '</select>';
+        html += '</div>';
+        html += '</div>';
+        // 
+        html += '<div class="col-lg-3">';
+        html += '<div class="form-group">';
+        html += '<label for="QtySparepart">Qty Sparepart</label>';
+        html += '<input name="qtySparepart[]" type="number" class="form-control form-control-sm" id="qtySparepart" placeholder="0" autocomplete="off" min=0>';
+        html += '</div>';
+        html += '</div>';
+        
+        html += '<div class="col-lg-1 mt-1">';
+        html += '<button type="button" id="deleteRowInputSparepart" class="btn btn-sm btn-outline-danger">';
+        html += '<i class="ti ti-trash"></i>';
+        html += '</button>';
+        html += '</div>';
+        html += '</div>';
+        
+        $('#inputFieldSparepart').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '#deleteRowInputSparepart', function () {
+        $(this).closest('#rowInputAddSparepart').remove();
+    });
+</script>
+<script>
+    // add field
+    $("#addFieldConsumable").click(function () {
+        let html = '';      
+
+        html += '<div class="row align-items-center" id="rowInputAddConsumable">';
+        html += '<div class="col-lg-7">';
+        html += '<div class="form-group">';
+        html += '<label for="consumable">Consumable</label>';
+        html += '<input name="consumable[]" type="text" class="form-control form-control-sm" id="consumable" placeholder="Input consumable">';
+        html += '</div>';
+        html += '</div>';
+        // 
+        html += '<div class="col-lg-3">';
+        html += '<div class="form-group">';
+        html += '<label for="QtyConsumable">Qty Consumable</label>';
+        html += '<input name="qtyConsumable[]" type="number" class="form-control form-control-sm" id="qtyConsumable" placeholder="0" autocomplete="off" min=0>';
+        html += '</div>';
+        html += '</div>';
+        
+        html += '<div class="col-lg-1 mt-1">';
+        html += '<button type="button" id="deleteRowInputConsumable" class="btn btn-sm btn-outline-danger">';
+        html += '<i class="ti ti-trash"></i>';
+        html += '</button>';
+        html += '</div>';
+        html += '</div>';
+        
+        $('#inputFieldConsumable').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '#deleteRowInputConsumable', function () {
+        $(this).closest('#rowInputAddConsumable').remove();
+    });
+</script>
+<script>
+    // add field
+    $("#addFieldJasa").click(function () {
+        let html = '';      
+
+        html += '<div class="row align-items-center" id="rowInputAddJasa">';
+        html += '<div class="col-lg-7">';
+        html += '<div class="form-group">';
+        html += '<label for="jasa">Jasa</label>';
+        html += '<select name="jasa[]" class="form-control form-control-sm" id="jasa">';
+        html += '<option  value="">-- Pilih --</option>';
+        html += '@foreach ($jasa as $item)';
+        html += '<option {{ old("jasa") == $item->id ? "selected" : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>';
+        html += '@endforeach';
+        html += '</select>';
+        html += '</div>';
+        html += '</div>';
+        // 
+        html += '<div class="col-lg-3">';
+        html += '<div class="form-group">';
+        html += '<label for="QtyJasa">Qty Jasa</label>';
+        html += '<input name="qtyJasa[]" type="number" class="form-control form-control-sm" id="qtyJasa" placeholder="0" autocomplete="off" min=0>';
+        html += '</div>';
+        html += '</div>';
+        
+        html += '<div class="col-lg-1 mt-1">';
+        html += '<button type="button" id="deleteRowInputJasa" class="btn btn-sm btn-outline-danger">';
+        html += '<i class="ti ti-trash"></i>';
+        html += '</button>';
+        html += '</div>';
+        html += '</div>';
+        
+        $('#inputFieldJasa').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '#deleteRowInputJasa', function () {
+        $(this).closest('#rowInputAddJasa').remove();
+    });
+</script>
+
+@endpush

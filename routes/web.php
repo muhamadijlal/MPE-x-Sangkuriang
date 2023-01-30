@@ -50,7 +50,9 @@ Route::group([
     // transaksi route write here
     Route::get('/transaksi','index')->name('index');
     Route::get('/transaksi/datatable','datatable')->name('datatable');
+    Route::get('/transaksi/select2','select2')->name('select2');
     Route::get('/transaksi/create','create')->name('create');
+    Route::post('/transaksi/store','store')->name('store');
     Route::get('/transaksi/edit','edit')->name('edit');
 });
 
