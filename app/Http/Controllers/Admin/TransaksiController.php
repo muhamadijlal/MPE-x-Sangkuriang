@@ -69,21 +69,23 @@ class TransaksiController extends Controller
             'qtyJasa.*' => ['required','numeric'],
         ]);
 
+        $id = Transaksi::latest()->get();
+
         $total_harga = DB::table('transaksi')
-                            ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
-                            ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
-                            ->join('consumable','transaksi.id','=','consumable.transaksi_id')
-                            ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
-                            ->join('jasa','t_jasa.jasa_id','=','jasa.id')
-                            ->select('transaksi.id as id_transaksi',
-                                DB::raw('t_sparepart.qty * sparepart.harga AS total_harga_sparepart'),
+                        ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
+                        ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
+                        ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
+                        ->join('jasa','t_jasa.jasa_id','=','jasa.id')
+                        ->join('consumable','transaksi.id','=','consumable.transaksi_id')
+                        ->select('transaksi.id as id_transaksi',
+                            DB::raw('t_sparepart.qty * sparepart.harga AS total_harga_sparepart'),
                                 DB::raw('t_jasa.qty * jasa.harga AS total_harga_jasa'),
                                 DB::raw('consumable.qty * consumable.harga AS total_harga_consumable'),
-                            DB::raw('(t_sparepart.qty * sparepart.harga) + (t_jasa.qty * jasa.harga) + (consumable.qty * consumable.harga) AS total'),
+                                DB::raw('(t_sparepart.qty * sparepart.harga) + (t_jasa.qty * jasa.harga) + (consumable.qty * consumable.harga) AS total'),
                             )
                             ->get();
 
-        dd($total_harga);
+        // dd($total_harga);
         // dd($request->all());
 
         $id = Transaksi::create([
