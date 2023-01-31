@@ -8,6 +8,7 @@ use App\Models\Jasa;
 use App\Models\Karyawan;
 use App\Models\Sparepart;
 use App\Models\T_jasa;
+use App\Models\T_Karyawan;
 use App\Models\T_sparepart;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ class TransaksiController extends Controller
             'status_pembayaran' => ['in:belum bayar, dp, lunas'],
             'status_pengerjaan' => ['in:pending, proses, selesai'],
             'tanggal' => ['required'],
+            'karyawan.*' => ['required'],
             'sparepart.*' => ['required'],
             'qtySparepart.*' => ['required','numeric'],
             'consumable.*' => ['required'],
@@ -67,11 +69,6 @@ class TransaksiController extends Controller
             'qtyJasa.*' => ['required','numeric'],
         ]);
 
-        // dd($request->all());
-        // foreach($request->sparepart as $sparepart){
-        //     $data = Sparepart::where('id',$sparepart)->get();
-            // dd($data->all());
-        // }
         $total_harga = 0;
 
         $id = Transaksi::create([
@@ -84,6 +81,13 @@ class TransaksiController extends Controller
             'perihal' => $request->perihal,
             'tanggal' => $request->tanggal,
         ])->id;
+
+        for ($i = 0; $i < count($request->karyawan); $i++) {
+            T_Karyawan::create([
+                'transaksi_id' => $id,
+                'karyawan_id' => $request->karyawan[$i],
+            ]);
+        }
 
         for ($i = 0; $i < count($request->sparepart); $i++) {
             T_sparepart::create([
