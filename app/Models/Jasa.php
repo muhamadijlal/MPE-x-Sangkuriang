@@ -13,6 +13,6 @@ class Jasa extends Model
     protected $guarded = ['id'];
 
     protected function t_jasa(){
-        return $this->belongsTo(T_jasa::class, 'id');
+        return $this->hasMany(T_jasa::class, 'id');
     }
 }

@@ -15,7 +15,8 @@ class CreateConsumablesTable extends Migration
     {
         Schema::create('consumable', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_id');
+            $table->unsignedBigInteger('transaksi_id');
+            $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->string('nama');
             $table->tinyInteger('qty');
             $table->string('satuan');

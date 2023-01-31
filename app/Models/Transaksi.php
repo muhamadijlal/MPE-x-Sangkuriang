@@ -23,4 +23,8 @@ class Transaksi extends Model
     protected function consumable(){
         return $this->hasMany(consumable::class, 'id');
     }
+
+    protected function t_karyawan(){
+        return $this->hasMany(T_Karyawan::class, 'id');
+    }
 }

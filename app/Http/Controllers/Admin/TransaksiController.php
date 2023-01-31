@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Consumable;
 use App\Models\Jasa;
+use App\Models\Karyawan;
 use App\Models\Sparepart;
 use App\Models\T_jasa;
 use App\Models\T_sparepart;
@@ -41,20 +42,45 @@ class TransaksiController extends Controller
 
     public function create(){
         $spareparts = Sparepart::all();
+        $karyawan = Karyawan::all();
         $jasa = Jasa::all();
 
-        return view('layouts.admin.transaksi.create', compact('spareparts','jasa'));
+        return view('layouts.admin.transaksi.create', compact('spareparts','jasa','karyawan'));
     }
 
     public function store(Request $request){
+        $request->validate([
+            'nama' => ['required'],
+            'penanggung_jawab' => ['required'],
+            'lokasi' => ['required'],
+            'perihal' => ['required'],
+            'status_pembayaran' => ['in:belum bayar, dp, lunas'],
+            'status_pengerjaan' => ['in:pending, proses, selesai'],
+            'tanggal' => ['required'],
+            'sparepart.*' => ['required'],
+            'qtySparepart.*' => ['required','numeric'],
+            'consumable.*' => ['required'],
+            'qtyConsumable.*' => ['required','numeric'],
+            'satuanConsumable.*' => ['required','string'],
+            'hargaConsumable.*' => ['required','numeric'],
+            'jasa.*' => ['required'],
+            'qtyJasa.*' => ['required','numeric'],
+        ]);
+
+        // dd($request->all());
+        // foreach($request->sparepart as $sparepart){
+        //     $data = Sparepart::where('id',$sparepart)->get();
+            // dd($data->all());
+        // }
+        $total_harga = 0;
 
         $id = Transaksi::create([
             'nama' => $request->nama,
             'penanggung_jawab' => $request->penanggung_jawab,
             'lokasi' => $request->lokasi,
-            'total_harga' => 200000,
-            'status_pengerjaan' => 'proses',
-            'status_pembayaran' => 'dp',
+            'total_harga' => $total_harga,
+            'status_pengerjaan' => 'pending',
+            'status_pembayaran' => 'belum bayar',
             'perihal' => $request->perihal,
             'tanggal' => $request->tanggal,
         ])->id;
@@ -72,8 +98,8 @@ class TransaksiController extends Controller
                 'transaksi_id' => $id,
                 'nama' => $request->consumable[$i],
                 'qty' => $request->qtyConsumable[$i],
-                'satuan' => 2,
-                'harga' => 15000,
+                'satuan' => $request->satuanConsumable[$i],
+                'harga' => $request->hargaConsumable[$i],
             ]);
         }
 

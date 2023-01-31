@@ -15,4 +15,8 @@ class Karyawan extends Model
     protected function role(){
         return $this->belongsTo(Role::class,'role_id');
     }
+
+    protected function t_karyawan(){
+        return $this->hasMany(T_Karyawan::class, 'id');
+    }
 }

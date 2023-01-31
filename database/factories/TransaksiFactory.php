@@ -25,7 +25,7 @@ class TransaksiFactory extends Factory
             'PT Yamaha Indonesia Motor Manufacturing',
             'PT Pupuk Kujang'];
 
-        $status_pengerjaan = ['proses','po','selesai'];
+        $status_pengerjaan = ['pending','proses','selesai'];
 
         $status_pembayaran = ['belum bayar','dp','lunas'];
 

@@ -12,6 +12,6 @@ class Sparepart extends Model
     protected $guarded = ['id'];
 
     protected function t_sparepart(){
-        return $this->belongsTo(T_sparepart::class, 'id');
+        return $this->hasMany(T_sparepart::class ,'id');
     }
 }

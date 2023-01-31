@@ -17,6 +17,6 @@ class T_jasa extends Model
     }
 
     protected function jasa(){
-        return $this->hasMany(Jasa::class, 'jasa_id');
+        return $this->belongsTo(Jasa::class, 'jasa_id');
     }
 }

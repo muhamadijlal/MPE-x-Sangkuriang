@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class T_sparepart extends Model
+class T_Karyawan extends Model
 {
     use HasFactory;
 
-    protected $table = 'T_sparepart';
+    protected $table = 't_karyawan';
     protected $guarded = ['id'];
 
     protected function transaksi(){
         return $this->belongsTo(Transaksi::class, 'transaksi_id');
     }
 
-    protected function sparepart(){
-        return $this->belongsTo(Sparepart::class, 'sparepart_id');
+    protected function karyawan(){
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
     }
 }

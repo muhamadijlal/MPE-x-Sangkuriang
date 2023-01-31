@@ -15,8 +15,10 @@ class CreateTSparepartsTable extends Migration
     {
         Schema::create('t_sparepart', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_id');
-            $table->foreignId('sparepart_id');
+            $table->unsignedBigInteger('transaksi_id');
+            $table->foreign('transaksi_id')->references('id')->on('transaksi');
+            $table->unsignedBigInteger('sparepart_id');
+            $table->foreign('sparepart_id')->references('id')->on('sparepart');
             $table->tinyInteger('qty');
             $table->timestamps();
         });

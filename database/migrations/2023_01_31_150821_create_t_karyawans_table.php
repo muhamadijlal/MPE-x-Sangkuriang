@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTJasasTable extends Migration
+class CreateTKaryawansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateTJasasTable extends Migration
      */
     public function up()
     {
-        Schema::create('t_jasa', function (Blueprint $table) {
+        Schema::create('t_karyawan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transaksi_id');
             $table->foreign('transaksi_id')->references('id')->on('transaksi');
-            $table->foreign('jasa_id')->references('id')->on('jasa');
-            $table->foreignId('jasa_id');
-            $table->tinyInteger('qty');
+            $table->unsignedBigInteger('karyawan_id');
+            $table->foreign('karyawan_id')->references('id')->on('karyawan');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateTJasasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_jasa');
+        Schema::dropIfExists('t_karyawan');
     }
 }
