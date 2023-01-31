@@ -12,7 +12,7 @@ use App\Models\T_Karyawan;
 use App\Models\T_sparepart;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -69,13 +69,28 @@ class TransaksiController extends Controller
             'qtyJasa.*' => ['required','numeric'],
         ]);
 
-        $total_harga = 0;
+        $total_harga = DB::table('transaksi')
+                            ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
+                            ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
+                            ->join('consumable','transaksi.id','=','consumable.transaksi_id')
+                            ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
+                            ->join('jasa','t_jasa.jasa_id','=','jasa.id')
+                            ->select('transaksi.id as id_transaksi',
+                                DB::raw('t_sparepart.qty * sparepart.harga AS total_harga_sparepart'),
+                                DB::raw('t_jasa.qty * jasa.harga AS total_harga_jasa'),
+                                DB::raw('consumable.qty * consumable.harga AS total_harga_consumable'),
+                            DB::raw('(t_sparepart.qty * sparepart.harga) + (t_jasa.qty * jasa.harga) + (consumable.qty * consumable.harga) AS total'),
+                            )
+                            ->get();
+
+        dd($total_harga);
+        // dd($request->all());
 
         $id = Transaksi::create([
             'nama' => $request->nama,
             'penanggung_jawab' => $request->penanggung_jawab,
             'lokasi' => $request->lokasi,
-            'total_harga' => $total_harga,
+            'total_harga' => $total_harga[0]->total,
             'status_pengerjaan' => 'pending',
             'status_pembayaran' => 'belum bayar',
             'perihal' => $request->perihal,
