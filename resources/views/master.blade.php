@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="icon" href="{{ asset('assets/images/mpe/logo-mini.png') }}" type="image/x-icon">
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
   {{-- myCSS --}}
   @stack('css')
