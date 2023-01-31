@@ -116,7 +116,7 @@
                             <div class="col-lg-10">
                                 <div class="form-group">
                                     <label for="consumable">Consumable</label>
-                                    <input name="consumable[]" type="text" class="form-control form-control-sm" id="consumable" placeholder="Input consumable">
+                                    <input name="consumable[]" type="text" class="form-control form-control-sm" id="consumable" placeholder="Input consumable" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-2">
