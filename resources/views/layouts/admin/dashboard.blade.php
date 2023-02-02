@@ -5,14 +5,14 @@
     <div class="card">
         <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
             <p class="card-title">Data Bulanan</p>
-            <div class="d-flex flex-wrap mb-5">
+            <div class="d-flex gap-5 flex-wrap mb-5">
             <div class="mr-5 mt-3">
                 <p class="text-muted">Total Penerimaan Uang</p>
-                <h3 class="text-primary fs-10 font-weight-small">@currency($totalTransaksi)</h3>
+                <h3 class="text-primary fs-10 font-weight-small">@currency($penerimaan)</h3>
             </div>
             <div class="mr-5 mt-3">
                 <p class="text-muted">Total Pengeluaran</p>
-                <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
+                <h3 class="text-primary fs-10 font-weight-small">@currency($sparepart[0])</h3>
             </div>
             <div class="mr-5 mt-3">
                 <p class="text-muted">Total PO</p>

@@ -117,7 +117,17 @@ class DashboardController extends Controller
                         ->whereYear('tanggal',date('Y'))
                         ->whereMonth('tanggal',date('m'))
                         ->count();
-        // dd($pending);
-        return view('layouts.admin.dashboard', compact('jan','feb','mar','apr','may','jun','jul','aug','sept','oct','nov', 'dec','penerimaan','po','totalTransaksi'));
+        $query = DB::table('sparepart')
+                        ->select(DB::raw('sum(harga * qty) as total'))
+                        ->whereYear('updated_at',date('Y'))
+                        ->whereMonth('updated_at',date('m'))
+                        ->get();
+        $sparepart = [];
+        foreach ($query as $item) {
+                $sparepart[] = $item->total;
+        }
+
+        // dd($sparepart);
+        return view('layouts.admin.dashboard', compact('jan','feb','mar','apr','may','jun','jul','aug','sept','oct','nov', 'dec','penerimaan','po','totalTransaksi','sparepart'));
     }
 }

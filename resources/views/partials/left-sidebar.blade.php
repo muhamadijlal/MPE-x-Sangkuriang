@@ -23,10 +23,17 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="#laporan" data-toggle="collapse" aria-expanded="false" aria-controls="laporan">
           <i class="icon-paper menu-icon"></i>
-          <span class="menu-title">Laporan / Pembukuan</span>
+          <span class="menu-title">Laporan</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="laporan">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a class="nav-link" href="{{ route('admin.laporan.hari') }}">Laporan Hari Ini</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('admin.laporan.bulan') }}">Laporan Bulan Ini</a></li>
+          </ul>
+        </div>
       </li>
     </ul>
   </nav>
