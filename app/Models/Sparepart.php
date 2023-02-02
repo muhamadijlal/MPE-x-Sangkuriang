@@ -9,7 +9,7 @@ class Sparepart extends Model
 {
     use HasFactory;
     protected $table = 'sparepart';
-    protected $guarded = ['id'];
+    protected $fillable = ['nama','merek','type','satuan','qty','harga'];
 
     protected function t_sparepart(){
         return $this->hasMany(T_sparepart::class ,'id');

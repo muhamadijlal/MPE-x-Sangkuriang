@@ -10,7 +10,7 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $table = 'transaksi';
-    protected $guarded = ['id'];
+    protected $fillable = ['nama','penanggung_jawab','lokasi','status_pengerjaan','status_pembayaran','perihal','tanggal'];
 
     protected function t_jasa(){
         return $this->hasMany(T_jasa::class, 'id');
@@ -26,5 +26,9 @@ class Transaksi extends Model
 
     protected function t_karyawan(){
         return $this->hasMany(T_Karyawan::class, 'id');
+    }
+
+    public function subtotal(){
+        return $this->hasOne(Subtotal::class, 'id');
     }
 }

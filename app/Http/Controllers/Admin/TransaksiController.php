@@ -7,12 +7,15 @@ use App\Models\Consumable;
 use App\Models\Jasa;
 use App\Models\Karyawan;
 use App\Models\Sparepart;
+use App\Models\Subtotal;
 use App\Models\T_jasa;
 use App\Models\T_Karyawan;
 use App\Models\T_sparepart;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isNan;
 
 class TransaksiController extends Controller
 {
@@ -26,7 +29,8 @@ class TransaksiController extends Controller
                 ->of($collections)
                 ->addColumn('','')
                 ->addColumn('total_harga', function($row){
-                    return format_uang($row->total_harga);
+                    return format_uang(isExist($row->subtotal));
+                    // return $row->subtotal;
                 })
                 ->addColumn('status_pembayaran', function($row){
                     return '<span class="badge badge-'.getSPembayaan($row->status_pembayaran).' pt-2 px-2">'.strtoupper($row->status_pembayaran).'</span>';
@@ -35,9 +39,9 @@ class TransaksiController extends Controller
                     return '<span class="badge badge-'.getSPengerjaan($row->status_pengerjaan).' pt-2 px-2">'.strtoupper($row->status_pengerjaan).'</span>';
                 })
                 ->addColumn('aksi', function($row){
-                    return '';
+                    return 'test';
                 })
-                ->rawColumns(['','aksi','status_pembayaran','status_pengerjaan'])
+                ->rawColumns(['','aksi','status_pembayaran','status_pengerjaan','total_harga'])
                 ->make(true);
     }
 
@@ -71,28 +75,10 @@ class TransaksiController extends Controller
 
         $id = Transaksi::latest()->get();
 
-        $total_harga = DB::table('transaksi')
-                        ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
-                        ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
-                        ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
-                        ->join('jasa','t_jasa.jasa_id','=','jasa.id')
-                        ->join('consumable','transaksi.id','=','consumable.transaksi_id')
-                        ->select('transaksi.id as id_transaksi',
-                            DB::raw('t_sparepart.qty * sparepart.harga AS total_harga_sparepart'),
-                                DB::raw('t_jasa.qty * jasa.harga AS total_harga_jasa'),
-                                DB::raw('consumable.qty * consumable.harga AS total_harga_consumable'),
-                                DB::raw('(t_sparepart.qty * sparepart.harga) + (t_jasa.qty * jasa.harga) + (consumable.qty * consumable.harga) AS total'),
-                            )
-                            ->get();
-
-        // dd($total_harga);
-        // dd($request->all());
-
         $id = Transaksi::create([
             'nama' => $request->nama,
             'penanggung_jawab' => $request->penanggung_jawab,
             'lokasi' => $request->lokasi,
-            'total_harga' => $total_harga[0]->total,
             'status_pengerjaan' => 'pending',
             'status_pembayaran' => 'belum bayar',
             'perihal' => $request->perihal,
@@ -131,6 +117,42 @@ class TransaksiController extends Controller
                 'qty' => $request->qtyJasa[$i]
             ]);
         }
+
+        $total_harga_sparepart = DB::table('transaksi')
+                        ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
+                        ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
+                        ->select(
+                            DB::raw('sum(t_sparepart.qty*sparepart.harga) as total_harga_sparepart')
+                        )
+                        ->where('transaksi.id', $id)
+                        ->get();
+
+        $total_harga_jasa = DB::table('transaksi')
+                        ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
+                        ->join('jasa','t_jasa.jasa_id','=','jasa.id')
+                        ->select(
+                            DB::raw('sum(t_jasa.qty*jasa.harga) as total_harga_jasa')
+                        )
+                        ->where('transaksi.id', $id)
+                        ->get();
+
+        $total_harga_consume = DB::table('transaksi')
+                        ->join('consumable','transaksi.id','=','consumable.transaksi_id')
+                        ->select(
+                            DB::raw('sum(consumable.qty*consumable.harga) as total_harga_consume')
+                        )
+                        ->where('transaksi.id', $id)
+                        ->get();
+
+        $total_harga_transaksi = $total_harga_consume[0]->total_harga_consume+$total_harga_jasa[0]->total_harga_jasa+$total_harga_sparepart[0]->total_harga_sparepart;
+
+        Subtotal::create([
+            'transaksi_id' => $id,
+            'total_harga_sparepart' => $total_harga_sparepart[0]->total_harga_sparepart,
+            'total_harga_jasa' => $total_harga_jasa[0]->total_harga_jasa,
+            'total_harga_consumable' => $total_harga_consume[0]->total_harga_consume,
+            'total_harga' => $total_harga_transaksi
+        ]);
 
         return redirect()->route('admin.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }

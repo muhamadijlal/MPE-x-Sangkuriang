@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class T_jasa extends Model
+class Subtotal extends Model
 {
     use HasFactory;
 
-    protected $table = 't_jasa';
-    protected $fillable = ['transaksi_id','jasa_id','qty'];
+    protected $table = 'subtotal';
+    protected $fillable = ['transaksi_id','total_harga_sparepart','total_harga_jasa','total_harga_consumable','total_harga'];
 
     protected function transaksi(){
         return $this->belongsTo(Transaksi::class, 'transaksi_id');
-    }
-
-    protected function jasa(){
-        return $this->belongsTo(Jasa::class, 'jasa_id');
     }
 }

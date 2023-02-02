@@ -18,7 +18,6 @@ class CreateTransaksisTable extends Migration
             $table->string('nama');
             $table->string('penanggung_jawab');
             $table->string('lokasi');
-            $table->integer('total_harga');
             $table->enum('status_pengerjaan',['pending','proses','selesai']);
             $table->enum('status_pembayaran',['belum bayar','dp','lunas']);
             $table->string('perihal');

@@ -33,7 +33,6 @@ class TransaksiFactory extends Factory
             'nama' => $this->faker->randomElement($pt),
             'penanggung_jawab' => $this->faker->name(),
             'lokasi' => $this->faker->address(),
-            'total_harga' => $this->faker->numberBetween(999999, 999999999),
             'status_pengerjaan' => $this->faker->randomElement($status_pengerjaan),
             'status_pembayaran' => $this->faker->randomElement($status_pembayaran),
             'perihal' => $this->faker->sentence(10, true),

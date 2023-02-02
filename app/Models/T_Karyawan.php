@@ -10,7 +10,7 @@ class T_Karyawan extends Model
     use HasFactory;
 
     protected $table = 't_karyawan';
-    protected $guarded = ['id'];
+    protected $fillable = ['transaksi_id','karyawan_id'];
 
     protected function transaksi(){
         return $this->belongsTo(Transaksi::class, 'transaksi_id');

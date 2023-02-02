@@ -128,7 +128,7 @@
                             <div class="col-lg-10">
                                 <div class="form-group">
                                     <label for="hargaConsumable">Harga Consumable</label>
-                                    <input name="hargaConsumable[]" type="text" class="form-control form-control-sm" id="currencyIDR" placeholder="000.000.000" autocomplete="off" min=0>
+                                    <input name="hargaConsumable[]" type="text" class="form-control form-control-sm"  placeholder="Input nominal tanpa titik" autocomplete="off" min=0>
                                 </div>
                             </div>
                             <div class="col-lg-2">
@@ -283,7 +283,7 @@
         html += '<div class="col-lg-10">';
         html += '<div class="form-group">';
         html += '<label for="hargaConsumable">Harga Consumable</label>';
-        html += '<input name="hargaConsumable[]" type="text" class="form-control form-control-sm" id="currencyIDR" placeholder="000.000.000" autocomplete="off">';
+        html += '<input name="hargaConsumable[]" type="text" class="form-control form-control-sm" placeholder="Input nominal tanpa titik" autocomplete="off">';
         html += '</div>';
         html += '</div>';
 
@@ -349,5 +349,4 @@
         $(this).closest('#rowInputAddJasa').remove();
     });
 </script>
-<script src="{{ asset('assets/js/currencyIDR.js') }}"></script>
 @endpush

@@ -11,7 +11,7 @@ class Role extends Model
     use HasFactory;
 
     protected $table = 'role';
-    protected $guarded = ['id'];
+    protected $fillable = ['jenis','upah','keterangan'];
 
     protected function karyawan(){
         return $this->hasMany(Karyawan::class, 'id');

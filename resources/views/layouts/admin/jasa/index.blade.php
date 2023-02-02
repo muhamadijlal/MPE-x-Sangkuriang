@@ -7,20 +7,29 @@
 
 @section('content')
 <div class="col-lg-12">
-    <div class="my-5">
-        <a href="{{ route('admin.jasa.create') }}" class="btn btn-primary btn-icon-text">
-            <i class="ti-plus btn-icon-prepend"></i>
-            Tambah Jasa
-        </a>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    @endif
     <div class="card p-4">
         <div class="card-body">
             <div class="card-title">
                 <h5>Jasa table</h5>
             </div>
+            <div class="my-5">
+                <a href="{{ route('admin.jasa.create') }}" class="btn btn-primary btn-icon-text">
+                    <i class="ti-plus btn-icon-prepend"></i>
+                    Tambah Jasa
+                </a>
+            </div>
             <table class="table table-striped"  id="myTable">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nama Jasa</th>
                         <th>Keterangan</th>
                         <th>Harga</th>
@@ -84,6 +93,7 @@ $(document).ready( function () {
             // }
         },
         columns: [
+            {data: ''},
             {data: 'nama', name: 'nama'},
             {data: 'deskripsi', name: 'deskripsi'},
             {data: 'harga', name: 'harga'},

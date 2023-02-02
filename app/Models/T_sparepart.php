@@ -10,7 +10,7 @@ class T_sparepart extends Model
     use HasFactory;
 
     protected $table = 'T_sparepart';
-    protected $guarded = ['id'];
+    protected $fillable = ['transaksi_id','sparepart_id','qty'];
 
     protected function transaksi(){
         return $this->belongsTo(Transaksi::class, 'transaksi_id');

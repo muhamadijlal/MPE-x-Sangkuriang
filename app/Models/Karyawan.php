@@ -10,7 +10,7 @@ class Karyawan extends Model
     use HasFactory;
 
     protected $table = 'karyawan';
-    protected $guarded = ['id'];
+    protected $fillable = ['role_id','nama','alamat','telepon'];
 
     protected function role(){
         return $this->belongsTo(Role::class,'role_id');

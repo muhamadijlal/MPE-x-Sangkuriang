@@ -10,7 +10,7 @@ class Jasa extends Model
     use HasFactory;
 
     protected $table = 'jasa';
-    protected $guarded = ['id'];
+    protected $fillable = ['nama','deskripsi','qty','satuan','harga'];
 
     protected function t_jasa(){
         return $this->hasMany(T_jasa::class, 'id');

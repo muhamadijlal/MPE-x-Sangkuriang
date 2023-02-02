@@ -29,6 +29,7 @@ class JasaController extends Controller
                     ';
                 })
                 ->rawColumns([
+                    '',
                     'aksi'
                 ])
                 ->make(true);

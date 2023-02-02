@@ -15,6 +15,14 @@ function getSPengerjaan($value){
     return $value;
 }
 
+function isExist($value){
+    if($value ==  null){
+        return 0;
+    }else{
+        return $value->total_harga;
+    }
+}
+
 function getSPembayaan($value){
     if($value == 'belum bayar'){
         $value = 'warning';

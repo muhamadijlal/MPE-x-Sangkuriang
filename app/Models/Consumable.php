@@ -10,7 +10,7 @@ class Consumable extends Model
     use HasFactory;
 
     protected $table = 'consumable';
-    protected $guarded = ['id'];
+    protected $fillable = ['transaksi_id','nama','qty','harga','satuan'];
 
     protected function transaksi(){
         return $this->belongsTo(Transaksi::class, 'transaksi_id');
