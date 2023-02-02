@@ -8,7 +8,7 @@
             <div class="d-flex flex-wrap mb-5">
             <div class="mr-5 mt-3">
                 <p class="text-muted">Total Penerimaan Uang</p>
-                <h3 class="text-primary fs-30 font-weight-medium">Rp {{ $penerimaan }}</h3>
+                <h3 class="text-primary fs-10 font-weight-small">@currency($totalTransaksi)</h3>
             </div>
             <div class="mr-5 mt-3">
                 <p class="text-muted">Total Pengeluaran</p>
