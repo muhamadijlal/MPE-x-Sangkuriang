@@ -2,12 +2,122 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('layouts.admin.dashboard');
+       $jan = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(1))
+                ->sum('transaksi.total_harga');
+
+        $feb = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(2))
+                ->sum('transaksi.total_harga');
+
+
+        $mar = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(3))
+                ->sum('transaksi.total_harga');
+
+
+        $apr = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(4))
+                ->sum('transaksi.total_harga');
+        
+        $may = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(5))
+                ->sum('transaksi.total_harga');
+
+
+        $jun = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(6))
+                ->sum('transaksi.total_harga');
+            
+
+        $jul = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(7))
+                ->sum('transaksi.total_harga');
+                
+
+        $aug = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(8))
+                ->sum('transaksi.total_harga');
+
+        $sept = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(9))
+                ->sum('transaksi.total_harga');   
+
+
+        $oct = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(10))
+                ->sum('transaksi.total_harga');
+            
+
+        $nov = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(11))
+                ->sum('transaksi.total_harga');
+
+
+        $dec = DB::table('transaksi')
+                ->where('status_pembayaran','=','lunas')
+                ->where('status_pengerjaan','=','selesai')
+                ->whereYear('tanggal','=',date('Y'))
+                ->whereMonth('tanggal','=',date(12))
+                ->sum('transaksi.total_harga');
+
+        $penerimaan = DB::table('transaksi')
+                        ->where('status_pembayaran','=','lunas')
+                        ->whereYear('tanggal','=',date('Y'))
+                        ->whereMonth('tanggal','=',date('m'))
+                        ->sum('transaksi.total_harga');
+        
+        $po = DB::table('transaksi')
+                    ->where('status_pengerjaan','=','po')
+                    ->whereYear('tanggal','=',date('Y'))
+                    ->whereMonth('tanggal',date('m'))
+                    ->count();
+        $totalTransaksi = DB::table('transaksi')
+                        ->whereYear('tanggal',date('Y'))
+                        ->whereMonth('tanggal',date('m'))
+                        ->count();
+        // dd($pending);
+        return view('layouts.admin.dashboard', compact('jan','feb','mar','apr','may','jun','jul','aug','sept','oct','nov', 'dec','penerimaan','po','totalTransaksi'));
     }
 }
