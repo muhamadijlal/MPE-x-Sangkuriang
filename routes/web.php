@@ -99,3 +99,15 @@ Route::group([
     Route::put('/karyawan/update/{id}','update')->name('update');
     Route::get('/karyawan/delete/{id}','destroy')->name('destroy');
 });
+
+Route::group([
+    'namespace' => 'App\Http\Controllers\Admin',
+    'controller' => LaporanController::class,
+    'prefix' => 'admin',
+    'as' => 'admin.laporan.'
+],  function(){
+    // Laporan route write here
+    Route::get('/laporan/hari','hari')->name('hari');
+    Route::get('/laporan/bulan','bulan')->name('bulan');
+}
+);
