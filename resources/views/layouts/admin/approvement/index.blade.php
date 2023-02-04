@@ -17,7 +17,7 @@
         <div class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Form Approvement</h4>
-                <form class="forms-sample mt-5" action="{{ route('admin.transaksi.approvementStore', $transaksi->id) }}" method="POST">
+                <form class="forms-sample mt-5" action="{{ route('admin.transaksi.approvementStore', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">

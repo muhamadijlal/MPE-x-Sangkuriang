@@ -172,6 +172,7 @@ class TransaksiController extends Controller
         $request->validate([
             'status_pembayaran' => ['required'],
             'status_pengerjaan' => ['required'],
+            'filename' => ['max:1000','mimes:jpg,png,jpeg']
         ]);
 
         Transaksi::where('id',$id)->update([
@@ -180,12 +181,13 @@ class TransaksiController extends Controller
         ]);
 
         if($request->has('file')){
-            $fileName = date('YmdHis') . '.' . $request->file->extension();
-            $request->file->move(public_path('bukti_pembayaran'), $fileName);
+            $file = $request->file('file');
+            $filename = date('YmdHis').str_replace(" ","_", $file->getClientOriginalName());
+            $request->file->move('bukti_vaksin',$filename);
 
             Kwitansi::create([
-                'transkasi_id' => $id,
-                'filename' => $fileName
+                'transaksi_id' => $id,
+                'filename' => $filename
             ]);
         };
 

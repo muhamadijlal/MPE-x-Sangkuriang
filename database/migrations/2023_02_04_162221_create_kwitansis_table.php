@@ -16,7 +16,7 @@ class CreateKwitansisTable extends Migration
         Schema::create('kwitansi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transaksi_id');
-            $table->foreign('transaksi_id')->references('id')->on('transkasi');
+            $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->string('filename');
             $table->timestamps();
         });
