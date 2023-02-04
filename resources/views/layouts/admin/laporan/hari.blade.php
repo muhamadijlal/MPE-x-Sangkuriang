@@ -7,7 +7,7 @@
                 <tbody>
                   <tr>
                     <th colspan="3">Transaksi Masuk :</th>
-                    <td>@mdo</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>2</td>

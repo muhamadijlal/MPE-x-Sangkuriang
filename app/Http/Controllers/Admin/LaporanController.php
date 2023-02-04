@@ -13,7 +13,7 @@ class LaporanController extends Controller
         $tm = DB::table('transaksi')
                 ->whereDate('tanggal', Carbon::today())
                 ->count();
-        // dd($tm);
+        dd($tm);
         return view('layouts.admin.laporan.hari');
     }
 }
