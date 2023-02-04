@@ -15,14 +15,16 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(1))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
         $feb = DB::table('transaksi')
                 ->where('status_pembayaran','=','lunas')
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(2))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
 
         $mar = DB::table('transaksi')
@@ -30,7 +32,8 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(3))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
 
         $apr = DB::table('transaksi')
@@ -38,14 +41,16 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(4))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
         
         $may = DB::table('transaksi')
                 ->where('status_pembayaran','=','lunas')
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(5))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
 
         $jun = DB::table('transaksi')
@@ -53,7 +58,8 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(6))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
             
 
         $jul = DB::table('transaksi')
@@ -61,7 +67,8 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(7))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
                 
 
         $aug = DB::table('transaksi')
@@ -69,14 +76,16 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(8))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
         $sept = DB::table('transaksi')
                 ->where('status_pembayaran','=','lunas')
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(9))
-                ->sum('transaksi.total_harga');   
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');   
 
 
         $oct = DB::table('transaksi')
@@ -84,7 +93,8 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(10))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
             
 
         $nov = DB::table('transaksi')
@@ -92,7 +102,8 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(11))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
 
         $dec = DB::table('transaksi')
@@ -100,16 +111,18 @@ class DashboardController extends Controller
                 ->where('status_pengerjaan','=','selesai')
                 ->whereYear('tanggal','=',date('Y'))
                 ->whereMonth('tanggal','=',date(12))
-                ->sum('transaksi.total_harga');
+                ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                ->sum('subtotal.total_harga');
 
         $penerimaan = DB::table('transaksi')
                         ->where('status_pembayaran','=','lunas')
                         ->whereYear('tanggal','=',date('Y'))
                         ->whereMonth('tanggal','=',date('m'))
-                        ->sum('transaksi.total_harga');
+                        ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                        ->sum('subtotal.total_harga');
         
         $po = DB::table('transaksi')
-                    ->where('status_pengerjaan','=','po')
+                    ->where('status_pengerjaan','=','pending')
                     ->whereYear('tanggal','=',date('Y'))
                     ->whereMonth('tanggal',date('m'))
                     ->count();
