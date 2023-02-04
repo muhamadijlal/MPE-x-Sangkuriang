@@ -55,7 +55,7 @@
       datasets: [{
         label: 'Total Data Transaksi Tahun Ini',
         data: [jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dec],
-        backgroundColor: '#03045e',
+        backgroundColor: '#4B49AC',
         borderWidth: 1
       }]
     },
