@@ -1,0 +1,81 @@
+*{
+    font-size: 12px;
+  }
+  /* kop surat */
+  hr.horizontal-line{
+    border: 1px solid black;
+  }
+
+  /* table */
+  table, td, th{
+    padding: 3px;
+  }
+
+  table{
+    margin-top: -6px;
+    border-top: 1px solid;
+    border-bottom: 2px solid black;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .quotation{
+    background: rgb(200, 200, 200);
+  }
+
+  .quotation td {
+    padding: 5px 0 5px 0;
+  }
+
+  /* table rincian */
+  table.rincian, td.rincian, th.rincian{
+    border: 1px solid;
+  }
+
+  td.rincian.title{
+    font-weight: bold;
+  }
+
+  table.rincian thead{
+    background-color:rgb(200, 200, 200);
+  }
+
+  td.rincian.number, td.rincian.qty, td.rincian.title.number, .quotation{
+    text-align: center;
+  }
+  
+  td.rincian.nominal, td.footer{
+    text-align: end;
+  }
+
+  td.rincian.empty{
+    padding: 10px;
+  }
+
+  /* footer table */
+  td.footer{
+    background-color: gray;
+    font-weight: bold;
+  }
+
+  /* syarat dan ketentuan */
+  ol li{
+    line-height: 20px;
+  }
+
+  /* table ttd */
+  table.ttd{
+    width: 75%;
+  }
+
+  table.ttd, td.ttd, th.ttd {
+    border: 1px solid;
+  }
+
+  td.ttd.column{
+    height: 100px;
+  }
+
+  td.ttd.column:first-of-type, td.ttd.column:nth-child(2), td.ttd.column:nth-child(3){
+    width: 160px;
+  }

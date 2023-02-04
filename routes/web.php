@@ -55,7 +55,7 @@ Route::group([
     Route::post('/transaksi/store','store')->name('store');
     Route::get('/transaksi/approvement/{id}','approvement')->name('approvement');
     Route::post('/transaksi/approvement/store/{id}','approvementStore')->name('approvementStore');
-    Route::get('/transaksi/invoice','invoice')->name('invoice');
+    Route::get('/transaksi/invoice/{id}','invoice')->name('invoice');
 });
 
 Route::group([

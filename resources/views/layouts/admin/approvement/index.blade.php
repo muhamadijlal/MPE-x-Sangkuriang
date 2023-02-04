@@ -112,6 +112,10 @@
                     </tr>
                 </table>
             </div>
+            <a href="{{ route('admin.transaksi.invoice', $transaksi->id) }}" class="btn btn-outline-info btn-icon-text">
+                Print
+                <i class="ti-printer btn-icon-append"></i>                                                                              
+            </a>
         </div>
     </div>
 </div>

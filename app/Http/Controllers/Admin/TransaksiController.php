@@ -194,7 +194,9 @@ class TransaksiController extends Controller
         return redirect()->route('admin.transaksi.index')->with('success','status transkasi berhasil diupdate!');
     }
 
-    public function invoice(){
-        return view("layouts.admin.transaksi.invoice");
+    public function invoice($id){
+        $transaksi = Transaksi::find($id);
+
+        return view("layouts.admin.transaksi.invoice", compact('transaksi'));
     }
 }
