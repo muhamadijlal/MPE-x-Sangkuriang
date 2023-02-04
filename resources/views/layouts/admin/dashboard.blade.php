@@ -11,7 +11,7 @@
                 <h3 class="text-primary fs-10 font-weight-small">@currency($penerimaan)</h3>
             </div>
             <div class="mr-5 mt-3">
-                <p class="text-muted">Total Pengeluaran</p>
+                <p class="text-muted">Total Pembelanjaan Barang</p>
                 <h3 class="text-primary fs-10 font-weight-small">@currency($sparepart[0])</h3>
             </div>
             <div class="mr-5 mt-3">

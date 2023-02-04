@@ -2,26 +2,23 @@
 @section('content')
     <div class="container">
         <div class="card p-3">
-            <h4 class="card-title">Laporan Hari Ini</h4>
-            <table class="table table-hover">
+            <h4 class="card-title mb-3">Laporan Hari Ini</h4>
+            <p class="mb-3">Transaksi Masuk : {{ $tm }}</p>
+            <hr>
+            <table class="table table-responsive table-hover">
                 <tbody>
+                  @foreach ($transaksiAll as $item)
                   <tr>
-                    <th colspan="3">Transaksi Masuk :</th>
-                    <td></td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->penanggung_jawab }}</td>
+                  <td>{{ $item->perihal }}</td>
+                  <td>{{ $item->status_pembayaran }}</td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
+              <hr>
+              
         </div>
     </div>
 @endsection
