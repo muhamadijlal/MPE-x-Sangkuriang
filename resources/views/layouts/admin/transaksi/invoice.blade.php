@@ -91,7 +91,7 @@
             <td class="rincian number">{{ $loop->iteration }}</td>
             <td class="rincian">{{ $item->sparepart->nama }} : {{ $item->sparepart->type }} ({{ $item->sparepart->merek }})</td>
             <td class="rincian qty">{{ $item->qty }}</td>
-            <td class="rincian">{{ $item->sparepart->satuan }}</td>
+            <td class="rincian satuan">{{ $item->sparepart->satuan }}</td>
             <td class="rincian nominal">@currency($item->sparepart->harga)</td>
             <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_sparepart)</td>
           </tr>
@@ -117,7 +117,7 @@
             <td class="rincian number">{{ $loop->iteration }}</td>
             <td class="rincian">{{ $item->nama }}</td>
             <td class="rincian qty">{{ $item->qty }}</td>
-            <td class="rincian">{{ $item->satuan }}</td>
+            <td class="rincian satuan">{{ $item->satuan }}</td>
             <td class="rincian nominal">@currency($item->harga)</td>
             <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_consumable)</td>
           </tr>
@@ -143,7 +143,7 @@
             <td class="rincian number">{{ $loop->iteration }}</td>
             <td class="rincian">{{ $item->jasa->nama }}</td>
             <td class="rincian qty">{{ $item->qty }}</td>
-            <td class="rincian">{{ $item->jasa->satuan }}</td>
+            <td class="rincian satuan">{{ $item->jasa->satuan }}</td>
             <td class="rincian nominal">@currency($item->jasa->harga)</td>
             <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_jasa)</td>
           </tr>
@@ -205,4 +205,7 @@
   </section>
 
 </body>
+<script>
+  window.print();
+</script>
 </html>

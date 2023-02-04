@@ -41,7 +41,7 @@
     background-color:rgb(200, 200, 200);
   }
 
-  td.rincian.number, td.rincian.qty, td.rincian.title.number, .quotation{
+  td.rincian.number, td.rincian.qty, td.rincian.title.number, td.rincian.satuan,.quotation{
     text-align: center;
   }
   
