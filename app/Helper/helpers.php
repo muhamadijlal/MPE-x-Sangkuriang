@@ -1,11 +1,7 @@
 <?php
 function getSPengerjaan($value){
-    if($value == 'proses'){
+    if($value == 'proses' || $value == 'pending'){
         $value = 'warning';
-    }
-    elseif($value == 'po')
-    {
-        $value = 'info';
     }
     else
     {
@@ -23,7 +19,7 @@ function isExist($value){
     }
 }
 
-function getSPembayaan($value){
+function getSPembayaran($value){
     if($value == 'belum bayar'){
         $value = 'warning';
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Consumable;
 use App\Models\Jasa;
 use App\Models\Karyawan;
+use App\Models\Kwitansi;
 use App\Models\Sparepart;
 use App\Models\Subtotal;
 use App\Models\T_jasa;
@@ -32,16 +33,21 @@ class TransaksiController extends Controller
                     return format_uang(isExist($row->subtotal));
                     // return $row->subtotal;
                 })
+                ->addColumn('tanggal', function($row){
+                    return date('d-M-Y', strtotime($row->tanggal));
+                })
                 ->addColumn('status_pembayaran', function($row){
-                    return '<span class="badge badge-'.getSPembayaan($row->status_pembayaran).' pt-2 px-2">'.strtoupper($row->status_pembayaran).'</span>';
+                    return '<span class="badge badge-'.getSPembayaran($row->status_pembayaran).' pt-2 px-2">'.strtoupper($row->status_pembayaran).'</span>';
                 })
                 ->addColumn('status_pengerjaan', function($row){
                     return '<span class="badge badge-'.getSPengerjaan($row->status_pengerjaan).' pt-2 px-2">'.strtoupper($row->status_pengerjaan).'</span>';
                 })
                 ->addColumn('aksi', function($row){
-                    return 'test';
+                    return '<a href="transaksi/approvement/'.$row->id.'" type="button" class="btn btn-outline-info btn-fw py-2">
+                                ACC
+                            </a>';
                 })
-                ->rawColumns(['','aksi','status_pembayaran','status_pengerjaan','total_harga'])
+                ->rawColumns(['','aksi','tanggal','status_pembayaran','status_pengerjaan','total_harga'])
                 ->make(true);
     }
 
@@ -157,7 +163,32 @@ class TransaksiController extends Controller
         return redirect()->route('admin.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }
 
-    public function edit(){
-        return view('layouts.admin.transaksi.edit');
+    public function approvement($id){
+        $transaksi = Transaksi::find($id);
+        return view('layouts.admin.approvement.index', compact('transaksi'));
+    }
+
+    public function approvementStore(Request $request, $id){
+        $request->validate([
+            'status_pembayaran' => ['required'],
+            'status_pengerjaan' => ['required'],
+        ]);
+
+        Transaksi::where('id',$id)->update([
+            'status_pembayaran' => $request->status_pembayaran,
+            'status_pengerjaan' => $request->status_pengerjaan,
+        ]);
+
+        if($request->has('file')){
+            $fileName = date('YmdHis') . '.' . $request->file->extension();
+            $request->file->move(public_path('bukti_pembayaran'), $fileName);
+
+            Kwitansi::create([
+                'transkasi_id' => $id,
+                'filename' => $fileName
+            ]);
+        };
+
+        return redirect()->route('admin.transaksi.index')->with('success','status transkasi berhasil diupdate!');
     }
 }

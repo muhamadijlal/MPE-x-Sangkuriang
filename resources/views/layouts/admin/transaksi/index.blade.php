@@ -15,6 +15,9 @@
         </button>
     </div>
     @endif
+    <div id="modal">
+
+    </div>
     <div class="card p-4">
         <div class="card-body">
             <div class="card-title">

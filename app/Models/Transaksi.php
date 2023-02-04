@@ -31,4 +31,8 @@ class Transaksi extends Model
     public function subtotal(){
         return $this->hasOne(Subtotal::class, 'id');
     }
+
+    public function kwitansi(){
+        return $this->hasOne(Kwitansi::class, 'id');
+    }
 }
