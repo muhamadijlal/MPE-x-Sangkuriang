@@ -1,9 +1,10 @@
 *{
-    font-size: 12px;
+    font-size: 13px;
   }
   /* kop surat */
-  hr.horizontal-line{
-    border: 1px solid black;
+
+  img{
+    border-bottom: 1px solid;
   }
 
   /* table */
@@ -12,7 +13,7 @@
   }
 
   table{
-    margin-top: -6px;
+    margin-top: -2px;
     border-top: 1px solid;
     border-bottom: 2px solid black;
     width: 100%;
@@ -23,7 +24,7 @@
     background: rgb(200, 200, 200);
   }
 
-  .quotation td {
+  .quotation th {
     padding: 5px 0 5px 0;
   }
 
@@ -77,5 +78,9 @@
   }
 
   td.ttd.column:first-of-type, td.ttd.column:nth-child(2), td.ttd.column:nth-child(3){
-    width: 160px;
+    width: 150px;
+  }
+
+  table.ttd thead{
+    border-bottom: 4px solid black;
   }

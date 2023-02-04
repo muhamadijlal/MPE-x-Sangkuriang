@@ -29,13 +29,13 @@
         <img src="{{ asset('assets/images/koppsurat.PNG') }}" alt="kopsurat" width="100%">
       </div>
 
-      <hr class="horizontal-line">
+      {{-- <hr class="horizontal-line"> --}}
       
       <table>
         <tr class="quotation">
-          <td colspan="4">
+          <th colspan="4">
             QUOTATION
-          </td>
+          </th>
         </tr>
         <tr>
           <td class="title">To</td>
@@ -63,7 +63,7 @@
 
       <div class="pembukaan">
         <p>Dengan Hormat, </p>
-        <p>Terima kasih atas kepercayaan dan kerja sama yang diberikan kepada kami,sesuai dengan Permintaan Bapak/Ibu, Berikut ini kami mengajukan penawaran untuk <strong>{{ $transaksi->perihal }}</strong></p>
+        <p>Terima kasih atas kepercayaan dan kerja sama yang diberikan kepada kami,sesuai dengan Permintaan Bapak/Ibu, Berikut ini kami mengajukan penawaran untuk {{ $transaksi->perihal }}</p>
       </div>
 
       <table class="rincian">
