@@ -111,5 +111,8 @@ Route::group([
     // Laporan route write here
     Route::get('/laporan/hari','hari')->name('hari');
     Route::get('/laporan/bulan','bulan')->name('bulan');
+    Route::get('/laporan/datatable','datatable')->name('datatable'); // Only use for laporan bulan
+    Route::get('/laporan/{id}','detail')->name('detail');
+
 }
 );
