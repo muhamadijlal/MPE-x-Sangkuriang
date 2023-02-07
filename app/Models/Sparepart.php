@@ -12,6 +12,6 @@ class Sparepart extends Model
     protected $fillable = ['nama','merek','type','satuan','qty','harga'];
 
     protected function t_sparepart(){
-        return $this->hasMany(T_sparepart::class ,'id');
+        return $this->hasMany(T_sparepart::class ,'sparepart_id');
     }
 }

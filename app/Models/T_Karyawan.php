@@ -13,10 +13,10 @@ class T_Karyawan extends Model
     protected $fillable = ['transaksi_id','karyawan_id'];
 
     protected function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
+        return $this->belongsTo(Transaksi::class, 'id');
     }
 
     protected function karyawan(){
-        return $this->belongsTo(Karyawan::class, 'karyawan_id');
+        return $this->belongsTo(Karyawan::class, 'id');
     }
 }

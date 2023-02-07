@@ -13,6 +13,6 @@ class Consumable extends Model
     protected $fillable = ['transaksi_id','nama','qty','harga','satuan'];
 
     protected function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
+        return $this->belongsTo(Transaksi::class, 'id');
     }
 }

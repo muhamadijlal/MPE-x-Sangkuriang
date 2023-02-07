@@ -13,10 +13,10 @@ class T_jasa extends Model
     protected $fillable = ['transaksi_id','jasa_id','qty'];
 
     protected function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
+        return $this->belongsTo(Transaksi::class, 'id');
     }
 
     protected function jasa(){
-        return $this->belongsTo(Jasa::class, 'jasa_id');
+        return $this->belongsTo(Jasa::class, 'id');
     }
 }

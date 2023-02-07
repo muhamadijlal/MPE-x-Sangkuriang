@@ -13,10 +13,10 @@ class T_sparepart extends Model
     protected $fillable = ['transaksi_id','sparepart_id','qty'];
 
     protected function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
+        return $this->belongsTo(Transaksi::class, 'id');
     }
 
     protected function sparepart(){
-        return $this->belongsTo(Sparepart::class, 'sparepart_id');
+        return $this->belongsTo(Sparepart::class, 'id');
     }
 }

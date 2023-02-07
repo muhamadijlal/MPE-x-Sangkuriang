@@ -13,6 +13,6 @@ class Kwitansi extends Model
     protected $fillable = ['transaksi_id','filename'];
 
     protected function transaksi(){
-        return $this->hasOne(Transaksi::class, 'transaksi_id');
+        return $this->hasOne(Transaksi::class, 'id');
     }
 }

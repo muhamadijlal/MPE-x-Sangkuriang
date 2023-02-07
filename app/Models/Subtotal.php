@@ -13,6 +13,6 @@ class Subtotal extends Model
     protected $fillable = ['transaksi_id','total_harga_sparepart','total_harga_jasa','total_harga_consumable','total_harga'];
 
     protected function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
+        return $this->belongsTo(Transaksi::class, 'id');
     }
 }
