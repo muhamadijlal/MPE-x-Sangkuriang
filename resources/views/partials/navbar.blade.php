@@ -73,10 +73,15 @@
             <img src="{{ asset('assets/images/avatar/ava.png') }}" alt="profile"/>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item">
-              <i class="ti-power-off text-primary"></i>
-              Logout
-            </a>
+            <form action="{{ route('logout') }}" method="POST">
+              @csrf
+              <button type="submit" class="btn btn-light">
+                <a class="dropdown-item" type="button">
+                  <i class="ti-power-off text-primary"></i>
+                  Logout
+                </a>
+              </button>
+          </form>
           </div>
         </li>
       </ul>

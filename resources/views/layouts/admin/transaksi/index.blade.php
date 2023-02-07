@@ -10,21 +10,15 @@
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Sukses!</strong> {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     @endif
-    <div id="modal">
-
-    </div>
     <div class="card p-4">
         <div class="card-body">
             <div class="card-title">
                 <h5>Transaksi table</h5>
             </div>
             <div class="my-5">
-                <a href="{{ route('admin.transaksi.create') }}" class="btn btn-primary btn-icon-text">
+                <a href="{{ route('admin.transaksi.create') }}" class="btn btn-outline-primary btn-icon-text">
                     <i class="ti-plus btn-icon-prepend"></i>
                     Tambah Transaksi
                 </a>

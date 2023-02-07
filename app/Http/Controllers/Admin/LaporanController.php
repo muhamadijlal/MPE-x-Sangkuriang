@@ -79,11 +79,30 @@ class LaporanController extends Controller
         ->get();
         
         return datatables()->of($dataTransaksi)
+                            ->addColumn('','')
                             ->addColumn('total_harga', function($dataTransaksi){
                                 return format_uang($dataTransaksi->total_harga);
                             })
-                            ->rawColumns(['total_harga'])
+                            ->rawColumns(['','total_harga'])
                             ->make(true);
-                          
     }   
+
+    public function laporan(){
+        return view('layouts.admin.laporan.all');
+    }
+
+    public function laporanAll(){
+        $dataTransaksi = DB::table('transaksi')
+                        ->select('transaksi.*','subtotal.total_harga')
+                        ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                        ->get();
+
+        return datatables()->of($dataTransaksi)
+                            ->addColumn('','')
+                            ->addColumn('total_harga', function($dataTransaksi){
+                                return format_uang($dataTransaksi->total_harga);
+                            })
+                            ->rawColumns(['','total_harga'])
+                            ->make(true);
+    }
 }

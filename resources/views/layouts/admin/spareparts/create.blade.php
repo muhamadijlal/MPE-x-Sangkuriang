@@ -9,7 +9,7 @@
                 @csrf
                 <div class="form-group">
                   <label for="nama">Nama Sparepart</label>
-                  <input name="nama" type="text" class="form-control @error('nama')
+                  <input name="nama" type="text" class="form-control form-control-sm @error('nama')
                     is-invalid
                   @enderror" id="nama" placeholder="Input Nama Sparepart" autocomplete="off" value="{{ old('nama') }}">
                   @error('nama')
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                   <label for="merek">Merek Sparepart</label>
-                  <input name="merek" type="text" class="form-control @error('merek')
+                  <input name="merek" type="text" class="form-control form-control-sm @error('merek')
                     is-invalid
                   @enderror" id="merek" placeholder="Input Merek Sparepart" autocomplete="off" value="{{ old('merek') }}">
                   @error('merek')
@@ -33,7 +33,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label for="type">Type Sparepart</label>
-                      <input name="type" type="text" class="form-control @error('type')
+                      <input name="type" type="text" class="form-control form-control-sm @error('type')
                         is-invalid
                       @enderror" id="type" placeholder="Input Jenis Sparepart" autocomplete="off" value="{{ old('type') }}">
                       @error('type')
@@ -46,7 +46,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label for="satuan">Satuan Sparepart</label>
-                      <input name="satuan" type="text" class="form-control @error('satuan')
+                      <input name="satuan" type="text" class="form-control form-control-sm @error('satuan')
                         is-invalid
                       @enderror" id="satuan" placeholder="Contoh: Lot/Pcs/Unit" autocomplete="off" value="{{ old('satuan') }}">
                       @error('satuan')
@@ -61,7 +61,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label for="qty">Qty</label>
-                      <input name="qty" type="number" class="form-control @error('qty')
+                      <input name="qty" type="number" class="form-control form-control-sm @error('qty')
                         is-invalid
                       @enderror" id="qty" placeholder="Input Jumlah Sparepart" autocomplete="off" value="{{ old('qty') }}">
                       @error('qty')
@@ -74,7 +74,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label for="harga">Harga Satuan</label>
-                      <input name="harga" type="number" class="form-control @error('harga')
+                      <input name="harga" type="number" class="form-control form-control-sm @error('harga')
                         is-invalid
                       @enderror" id="harga" placeholder="Input Harga Sparepart" autocomplete="off" value="{{ old('harga') }}">
                       @error('harga')
@@ -85,9 +85,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="my-5">
-                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <div class="my-5 float-end">
                   <button class="btn btn-light">Cancel</button>
+                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </div>
             </form>
         </div>

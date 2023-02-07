@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-lg-12">
-    <div class="card">
+    <div class="card p-4">
         <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
             <p class="card-title">Data Bulanan</p>
             <div class="d-flex gap-5 flex-wrap mb-5">

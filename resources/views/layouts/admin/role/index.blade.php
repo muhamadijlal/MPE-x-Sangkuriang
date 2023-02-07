@@ -4,9 +4,6 @@
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Sukses!</strong> {{ session('success') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
 @endif
 <div class="row">
@@ -18,7 +15,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Jenis Role Karyawan</th>
+                <th>Role</th>
                 <th>Upah (%)</th>
                 <th>Keterangan</th>
                 <th>Aksi</th>
@@ -50,7 +47,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="jenis">Jenis Role</label>
-                    <input name="jenis" type="text" class="form-control @error('jenis')
+                    <input name="jenis" type="text" class="form-control form-control-sm  @error('jenis')
                       is-invalid
                     @enderror" id="jenis" placeholder="Input Jenis Role" autocomplete="off">
                     @error('jenis')
@@ -61,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="upah">Upah (%)</label>
-                    <input name="upah" type="number" class="form-control @error('upah')
+                    <input name="upah" type="number" class="form-control form-control-sm  @error('upah')
                       is-invalid
                     @enderror" id="upah" placeholder="Input Upah Karyawan (%)" autocomplete="off">
                     @error('upah')
@@ -72,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <input name="keterangan" type="text" class="form-control @error('keterangan')
+                    <input name="keterangan" type="text" class="form-control form-control-sm  @error('keterangan')
                       is-invalid
                     @enderror" id="keterangan" placeholder="Input Jenis Sparepart" autocomplete="off">
                     @error('keterangan')
@@ -81,9 +78,9 @@
                       </div>
                     @enderror
                 </div>
-                <div class="my-5">
-                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <div class="my-5 float-end">
                   <button class="btn btn-light">Cancel</button>
+                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </div>
             </form>
         </div>

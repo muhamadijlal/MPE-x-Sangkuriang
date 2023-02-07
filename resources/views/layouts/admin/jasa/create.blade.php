@@ -9,19 +9,40 @@
         @csrf
         <div class="form-group">
           <label for="nama">Nama Jasa</label>
-          <input name="nama" type="text" class="form-control" id="nama" placeholder="Input Nama Jasa" required>
+          <input name="nama" type="text" class="form-control form-control-sm @error('nama')
+            is-invalid
+          @enderror" id="nama" placeholder="Input Nama Jasa" required>
+          @error('nama')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
         </div>
         <div class="form-group">
           <label for="keterangan">Keterangan Jasa</label>
-          <input name="keterangan" type="text" class="form-control" id="keterangan" placeholder="Input Keterangan Jasa" required>
+          <input name="keterangan" type="text" class="form-control form-control-sm @error('keterangan')
+            is-invalid
+          @enderror" id="keterangan" placeholder="Input Keterangan Jasa" required>
+          @error('keterangan')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
         </div>
         <div class="form-group">
           <label for="harga">Harga Jasa</label>
-          <input name="harga" type="number" class="form-control" id="harga" placeholder="Input Harga Jasa" required>
+          <input name="harga" type="number" class="form-control form-control-sm @error('harga')
+            is-invalid
+          @enderror" id="harga" placeholder="Input Harga Jasa" required>
+          @error('harga')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
         </div>
-        <div class="my-5">
-          <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <div class="my-5 float-end">
           <button class="btn btn-light">Cancel</button>
+          <button type="submit" class="btn btn-primary mr-2">Submit</button>
         </div>
       </form>
     </div>

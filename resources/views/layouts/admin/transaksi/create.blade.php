@@ -89,7 +89,7 @@
                                     <select class="form-control form-control-sm" id="sparepart" name="sparepart[]">
                                         <option value="">--Pilih--</option>
                                         @foreach ($spareparts as $item)
-                                            <option {{ old('sparepart') == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            <option {{ old('sparepart') == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->nama }} : {{ $item->merek }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -176,9 +176,9 @@
                     </div>
                 </div>
                 
-                <div class="my-5">
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <div class="my-5 float-end">
                     <button class="btn btn-light">Cancel</button>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </div>
             </form>
         </div>
@@ -199,7 +199,7 @@
         html += '<select class="form-control form-control-sm" id="sparepart" name="sparepart[]">';
         html += '<option value="">--Pilih--</option>';
         html += '@foreach ($spareparts as $item)';
-        html += '<option {{ old("sparepart") == $item->id ? "selected" : ''}} value="{{ $item->id }}">{{ $item->nama }}</option>';
+        html += '<option {{ old("sparepart") == $item->id ? "selected" : ''}} value="{{ $item->id }}">{{ $item->nama }} : {{ $item->merek }}</option>';
         html += '@endforeach';  
         html += '</select>';
         html += '</div>';
@@ -269,7 +269,7 @@
         html += '<div class="col-lg-10">';
         html += '<div class="form-group">';
         html += '<label for="consumable">Consumable</label>';
-        html += '<input name="consumable[]" type="text" class="form-control form-control-sm" id="consumable" placeholder="Input consumable">';
+        html += '<input name="consumable[]" type="text" class="form-control form-control-sm" id="consumable" placeholder="Input consumable" autocomplete="off">';
         html += '</div>';
         html += '</div>';
         // 

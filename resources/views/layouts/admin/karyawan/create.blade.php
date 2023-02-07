@@ -9,7 +9,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="nama">Nama Karyawan</label>
-                    <input name="nama" type="text" class="form-control @error('nama')
+                    <input name="nama" type="text" class="form-control form-control-sm @error('nama')
                       is-invalid
                     @enderror" id="nama" placeholder="Input Nama Karyawan" autocomplete="off" value="{{ old("nama") }}">
                     @error('nama')
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                   <label for="alamat">Alamat Karyawan</label>
-                  <textarea name="alamat" class="form-control @error('alamat')
+                  <textarea name="alamat" class="form-control form-control-sm @error('alamat')
                     is-invalid
                   @enderror" id="alamat" rows="4" placeholder="Input Alamat Karyawan Sesuai KTP">{{ old('alamat') }}</textarea>
                   @error('alamat')
@@ -33,7 +33,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label for="telepon">Nomor Telepon</label>
-                      <input name="telepon" type="text" class="form-control @error('telepon')
+                      <input name="telepon" type="text" class="form-control form-control-sm @error('telepon')
                         is-invalid
                       @enderror" id="telepon" placeholder="Input Nomor Telepon Karyawan" autocomplete="off" value="{{ old("telepon") }}">
                       @error('telepon')
@@ -46,7 +46,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label>Role</label>
-                      <select for="role" class="form-control @error('role')
+                      <select for="role" class="form-control form-control-sm @error('role')
                         is-invalid
                       @enderror" name="role">
                         <option value="">-- Pilih --</option>
@@ -59,11 +59,12 @@
                           {{ $message }}
                         </div>
                       @enderror
+                    </div>
                   </div>
                 </div>
-                <div class="my-5">
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                <div class="my-5 float-end">
+                  <button class="btn btn-light">Cancel</button>
+                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </div>
             </form>
         </div>

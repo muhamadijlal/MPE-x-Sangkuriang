@@ -10,9 +10,6 @@
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Sukses!</strong> {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     @endif
     <div class="card p-4">
@@ -21,7 +18,7 @@
                 <h5>Karyawan table</h5>
             </div>
             <div class="my-5">
-                <a href="{{ route('admin.karyawan.create') }}" class="btn btn-primary btn-icon-text">
+                <a href="{{ route('admin.karyawan.create') }}" class="btn btn-outline-primary btn-icon-text">
                     <i class="ti-plus btn-icon-prepend"></i>
                     Tambah Karyawan
                 </a>
@@ -29,7 +26,7 @@
             <table class="table table-striped"  id="myTable" width="100%">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>Nama Karyawan</th>
                         <th>Alamat</th>
                         <th>Nomor Telepon</th>

@@ -30,6 +30,7 @@
         </a>
         <div class="collapse {{ request()->routeIs('admin.laporan.*') ? 'show' : ''}}" id="laporan">
           <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a class="nav-link" href="{{ route('admin.laporan.laporan') }}">Laporan</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('admin.laporan.hari') }}">Laporan Hari Ini</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('admin.laporan.bulan') }}">Laporan Bulan Ini</a></li>
           </ul>

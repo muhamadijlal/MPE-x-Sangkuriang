@@ -1,20 +1,33 @@
 @extends('master')
+
+@push('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
+@endpush
+
 @section('content')
-    <div class="container">
-        <div class="card p-3">
-          <h4 class="card-title mb-3">Laporan Hari Ini</h4>
-          <div class="d-flex justify-content-between gap-4">
-            <p class="mb-3">Transaksi Masuk : {{ $tm }}</p>
-            <p class="mb-3"> Perkiraan Pengeluaran : @currency($totalPengeluaran)</p>
-            <p class="mb-3"> Perkiraan Uang Didapat : @currency($pemasukan)</p>
-          </div>
-            <hr>
-            <table class="table table-responsive table-hover">
-              <h4 class="text-center">Data Pengerjaan Belum Selesai Bulan Ini</h4>
-              <hr class="mb-4">
-              <table class="table table-striped"  id="myTable" width="100%">
+<div class="col-lg-12">
+    <div class="card p-4 mb-5">
+        <div class="card-body">
+            <div class="d-flex justify-content-between gap-4">
+                <h5 class="mb-3">Transaksi Masuk : {{ $tm }}</h5>
+                <h5 class="mb-3"> Perkiraan Pengeluaran : @currency($totalPengeluaran)</h5>
+                <h5 class="mb-3"> Perkiraan Uang Didapat : @currency($pemasukan)</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card p-4">
+        <div class="card-body">
+            <div class="card-title">
+                <h5>Tabel Laporan Bulanan</h5>
+            </div>
+            <table class="table table-striped"  id="myTable" width="100%">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nama</th>
                         <th>Penanggung Jawab</th>
                         <th>Lokasi Perusahaan</th>
@@ -25,12 +38,11 @@
                         <th>Status Pembayaran</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
-              </table>
-              <hr>
-              
+            <tbody></tbody>
+            </table>
         </div>
     </div>
+</div>
 @endsection
 @push('js')
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
@@ -62,6 +74,7 @@ $(document).ready( function () {
             // }
         },
         columns: [
+            {data: ''},
             {data: 'nama', name: 'nama'},
             {data: 'penanggung_jawab', name: 'penanggung_jawab'},
             {data: 'lokasi', name: 'lokasi'},
