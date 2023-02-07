@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subtotal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,5 +105,11 @@ class LaporanController extends Controller
                             })
                             ->rawColumns(['','total_harga'])
                             ->make(true);
+    }
+
+    public function detail($id){
+       $data =  Subtotal::find($id);
+        // dd($data);
+       return view('layouts.admin.laporan.detail', compact('data'));
     }
 }

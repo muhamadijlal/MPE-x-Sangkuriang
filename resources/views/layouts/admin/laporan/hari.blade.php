@@ -22,7 +22,7 @@
                 <td>{{ $item->nama }}</td>
                 <td>{{ $item->penanggung_jawab }}</td>
                 <td>{{ $item->perihal }}</td>
-                <td><a href="/laporan/{{ $item->id }}" class="btn btn-primary">Detail</a></td>
+                <td><a href="/admin/laporan/{{ $item->id }}" class="btn btn-primary">Detail</a></td>
               </tr>
               @empty
               <tr>
