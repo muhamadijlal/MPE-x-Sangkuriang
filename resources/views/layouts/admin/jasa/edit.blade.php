@@ -43,7 +43,7 @@
           @enderror
         </div>
         <div class="my-5 float-end">
-          <button class="btn btn-light">Cancel</button>
+          <button type="reset" class="btn btn-light">Cancel</button>
           <button type="submit" class="btn btn-primary mr-2">Submit</button>
         </div>
         @endforeach

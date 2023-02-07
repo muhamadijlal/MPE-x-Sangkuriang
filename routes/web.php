@@ -123,9 +123,33 @@ Route::middleware(['revalidate','auth'])->group(function(){
     });
 
     // User Middleware
-    // Route::middleware('user')->group(function(){
+    Route::middleware('user')->group(function(){
+        Route::group([
+            'namespace' => 'App\Http\Controllers\User',
+            'controller' => DashboardController::class,
+            'prefix' => 'user',
+            'as' => 'user.dashboard.'
+        ], function(){
+            // dashboard route write here
+            Route::get('/dashboard','index')->name('index');
+        });
 
-    // });
+        Route::group([
+            'namespace' => 'App\Http\Controllers\User',
+            'controller' => TransaksiController::class,
+            'prefix' => 'user',
+            'as' => 'user.transaksi.'
+        ], function(){
+            // transaksi route write here
+            Route::get('/transaksi','index')->name('index');
+            Route::get('/transaksi/datatable','datatable')->name('datatable');
+            Route::get('/transaksi/create','create')->name('create');
+            Route::post('/transaksi/store','store')->name('store');
+            Route::get('/transaksi/approvement/{id}','approvement')->name('approvement');
+            Route::post('/transaksi/approvement/store/{id}','approvementStore')->name('approvementStore');
+            Route::get('/transaksi/invoice/{id}','invoice')->name('invoice');
+        });
+    });
     
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\Consumable;
-use App\Models\Jasa;
-use App\Models\Karyawan;
-use App\Models\Kwitansi;
-use App\Models\Sparepart;
-use App\Models\Subtotal;
-use App\Models\T_jasa;
-use App\Models\T_Karyawan;
-use App\Models\T_sparepart;
 use App\Models\Transaksi;
+use App\Models\Sparepart;
+use App\Models\T_Sparepart;
+use App\Models\Jasa;
+use App\Models\Consumable;
+use App\Models\T_Jasa;
+use App\Models\Karyawan;
+use App\Models\T_Karyawan;
+use App\Models\Subtotal;
+use App\Models\Kwitansi;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isNan;
 
 class TransaksiController extends Controller
 {
     public function index(){
-        return view('layouts.admin.transaksi.index');
+        return view('layouts.user.transaksi.index');
     }
 
     public function datatable(){
@@ -56,7 +54,7 @@ class TransaksiController extends Controller
         $karyawan = Karyawan::all();
         $jasa = Jasa::all();
 
-        return view('layouts.admin.transaksi.create', compact('spareparts','jasa','karyawan'));
+        return view('layouts.user.transaksi.create', compact('spareparts','jasa','karyawan'));
     }
 
     public function store(Request $request){
@@ -160,12 +158,12 @@ class TransaksiController extends Controller
             'total_harga' => $total_harga_transaksi
         ]);
 
-        return redirect()->route('admin.transaksi.index')->with('success','Transaksi berhasil dibuat!');
+        return redirect()->route('user.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }
 
     public function approvement($id){
         $transaksi = Transaksi::find($id);
-        return view('layouts.admin.approvement.index', compact('transaksi'));
+        return view('layouts.user.approvement.index', compact('transaksi'));
     }
 
     public function approvementStore(Request $request, $id){
@@ -191,12 +189,12 @@ class TransaksiController extends Controller
             ]);
         };
 
-        return redirect()->route('admin.transaksi.index')->with('success','status transkasi berhasil diupdate!');
+        return redirect()->route('user.transaksi.index')->with('success','status transkasi berhasil diupdate!');
     }
 
     public function invoice($id){
         $transaksi = Transaksi::find($id);
 
-        return view("layouts.admin.transaksi.invoice", compact('transaksi'));
+        return view("layouts.user.transaksi.invoice", compact('transaksi'));
     }
 }

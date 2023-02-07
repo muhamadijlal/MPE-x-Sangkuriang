@@ -66,7 +66,6 @@ class LaporanController extends Controller
                         ->sum('subtotal.total_harga');
         // dd($pemasukan);
 
-      
         return view('layouts.admin.laporan.bulan',compact('tm','totalPengeluaran','pemasukan'));
     }
 

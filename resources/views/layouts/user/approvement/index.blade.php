@@ -14,7 +14,7 @@
         <div class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Form Approvement</h4>
-                <form class="forms-sample mt-5" action="{{ route('admin.transaksi.approvementStore', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="forms-sample mt-5" action="{{ route('user.transaksi.approvementStore', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">
@@ -109,7 +109,7 @@
                     </tr>
                 </table>
             </div>
-            <a href="{{ route('admin.transaksi.invoice', $transaksi->id) }}" class="btn btn-outline-info btn-icon-text">
+            <a href="{{ route('user.transaksi.invoice', $transaksi->id) }}" class="btn btn-outline-info btn-icon-text">
                 Print
                 <i class="ti-printer btn-icon-append"></i>                                                                              
             </a>
