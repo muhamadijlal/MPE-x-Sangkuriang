@@ -18,7 +18,7 @@
                 <h5>Transaksi table</h5>
             </div>
             <div class="my-5">
-                <a href="{{ route('admin.transaksi.create') }}" class="btn btn-outline-primary btn-icon-text">
+                <a href="{{ route('user.transaksi.create') }}" class="btn btn-outline-primary btn-icon-text">
                     <i class="ti-plus btn-icon-prepend"></i>
                     Tambah Transaksi
                 </a>

@@ -193,7 +193,9 @@ class TransaksiController extends Controller
     }
 
     public function invoice($id){
-        $transaksi = Transaksi::find($id);
+        $transaksi = Transaksi::findOrFail($id);
+
+        dd($transaksi);
 
         return view("layouts.user.transaksi.invoice", compact('transaksi'));
     }

@@ -17,7 +17,7 @@
     <div class="card p-4">
         <div class="card-body">
             <h4 class="card-title">Form tambah transaksi</h4>
-            <form class="forms-sample mt-5" action="{{ route('admin.transaksi.store') }}" method="POST">
+            <form class="forms-sample mt-5" action="{{ route('user.transaksi.store') }}" method="POST">
                 @csrf
                 <small>Client/Customer</small>
                 <div class="border rounded p-4 mb-4">
