@@ -13,6 +13,6 @@ class Jasa extends Model
     protected $fillable = ['nama','deskripsi','qty','satuan','harga'];
 
     protected function t_jasa(){
-        return $this->hasMany(T_jasa::class, 'jasa_id');
+        return $this->hasMany(T_jasa::class, 'id');
     }
 }

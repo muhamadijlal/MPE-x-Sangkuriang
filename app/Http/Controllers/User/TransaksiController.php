@@ -158,6 +158,7 @@ class TransaksiController extends Controller
             'total_harga' => $total_harga_transaksi
         ]);
 
+
         return redirect()->route('user.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }
 
@@ -194,8 +195,6 @@ class TransaksiController extends Controller
 
     public function invoice($id){
         $transaksi = Transaksi::find($id);
-
-        dd($transaksi->t_sparepart);
 
         return view("layouts.user.transaksi.invoice", compact('transaksi'));
     }

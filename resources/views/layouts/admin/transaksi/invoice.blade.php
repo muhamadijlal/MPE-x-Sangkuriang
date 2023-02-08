@@ -93,7 +93,8 @@
             <td class="rincian qty">{{ $item->qty }}</td>
             <td class="rincian satuan">{{ $item->sparepart->satuan }}</td>
             <td class="rincian nominal">@currency($item->sparepart->harga)</td>
-            <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_sparepart)</td>
+            {{-- <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_sparepart)</td> --}}
+            <td class="rincian nominal">@currency(floatval($item->qty)*floatval($item->sparepart->harga))</td>
           </tr>
           @endforeach
           <tr>
@@ -119,7 +120,8 @@
             <td class="rincian qty">{{ $item->qty }}</td>
             <td class="rincian satuan">{{ $item->satuan }}</td>
             <td class="rincian nominal">@currency($item->harga)</td>
-            <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_consumable)</td>
+            {{-- <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_consumable)</td> --}}
+            <td class="rincian nominal">@currency(floatval($item->qty)*floatval($item->harga))</td>
           </tr>
           @endforeach
           <tr>

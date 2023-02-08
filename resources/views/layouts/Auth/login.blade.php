@@ -51,7 +51,7 @@
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" autocomplete="off">
                 </div>
-                <div class="mt-3">
+                <div class="mt-3 d-flex justify-content-end">
                   <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Log In</button>
                 </div>
               </form>

@@ -17,6 +17,6 @@ class T_sparepart extends Model
     }
 
     protected function sparepart(){
-        return $this->belongsTo(Sparepart::class, 'id');
+        return $this->belongsTo(Sparepart::class, 'sparepart_id');
     }
 }
