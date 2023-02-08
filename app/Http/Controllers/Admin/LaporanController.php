@@ -23,11 +23,30 @@ class LaporanController extends Controller
                         ->whereDate('transaksi.updated_at',Carbon::now())
                         ->join('subtotal','transaksi.id','=','subtotal.transaksi_id');
 
-        $sparepart = $pengeluaran->sum('total_harga_sparepart');
+        $dataSparepart = DB::table('sparepart')
+                        ->whereDate('sparepart.updated_at',Carbon::now())
+                        ->get(['qty','harga']);
+        $totalSparepart = [];
+
+        foreach ($dataSparepart as $item) {
+            $qty = $item->qty;
+            $harga = $item->harga;
+        $sparepart[] = $qty*$harga; //For geting data saprepart of table wheredate is current day
+
+        }
+
+        // dd($sparepart);
+        
         $jasa = $pengeluaran->sum('total_harga_jasa');
         $consumable = $pengeluaran->sum('total_harga_consumable');
 
-        $totalPengeluaran = $sparepart+$jasa+$consumable;
+        if (!empty($sparepart)) { // this conditional for checking data saprepart, this will be error without conditional, because the saprepart data type is array.
+            $totalPengeluaran = $sparepart[0] + $jasa + $consumable;
+        }else{
+            $totalPengeluaran = $jasa + $consumable;
+        }
+
+        // dd($totalPengeluaran);
 
 
         $query = DB::table('transaksi')
@@ -53,11 +72,28 @@ class LaporanController extends Controller
                     ->whereMonth('transaksi.updated_at',date('m'))
                     ->join('subtotal','transaksi.id','=','subtotal.transaksi_id');
         
-        $sparepart = $pengeluaran->sum('total_harga_sparepart');
+                    $dataSparepart = DB::table('sparepart')
+                    ->whereDate('sparepart.updated_at',Carbon::now())
+                    ->get(['qty','harga']);
+    $totalSparepart = [];
+
+    foreach ($dataSparepart as $item) {
+        $qty = $item->qty;
+        $harga = $item->harga;
+    $sparepart[] = $qty*$harga; //For geting data saprepart of table wheredate is current month
+
+    }
+
         $jasa = $pengeluaran->sum('total_harga_jasa');
         $consumable = $pengeluaran->sum('total_harga_consumable');
 
-        $totalPengeluaran = $sparepart + $jasa + $consumable;
+    if (!empty($sparepart)) { // this conditional for checking data saprepart, this will be error without conditional, because the saprepart data type is array.
+        $totalPengeluaran = $sparepart[0] + $jasa + $consumable;
+    }else{
+        $totalPengeluaran = $jasa + $consumable;
+    }
+    
+    // dd($totalPengeluaran);
 
         $pemasukan = DB::table('transaksi')
                         ->where('status_pembayaran','=','lunas')
@@ -88,7 +124,38 @@ class LaporanController extends Controller
     }   
 
     public function laporan(){
-        return view('layouts.admin.laporan.all');
+        $tm = DB::table('transaksi')->count();
+
+        $pengeluaran = DB::table('transaksi')->join('subtotal','transaksi.id','=','subtotal.transaksi_id');
+
+            $dataSparepart = DB::table('sparepart')->get(['qty','harga']);
+
+        $totalSparepart = [];
+
+        foreach ($dataSparepart as $item) {
+        $qty = $item->qty;
+        $harga = $item->harga;
+        $sparepart[] = $qty*$harga; //For geting data saprepart of table wheredate is current month
+
+        }
+
+        $jasa = $pengeluaran->sum('total_harga_jasa');
+        $consumable = $pengeluaran->sum('total_harga_consumable');
+
+        if (!empty($sparepart)) { // this conditional for checking data saprepart, this will be error without conditional, because the saprepart data type is array.
+        $totalPengeluaran = $sparepart[0] + $jasa + $consumable;
+        }else{
+        $totalPengeluaran = $jasa + $consumable;
+        }
+
+// dd($totalPengeluaran);
+
+    $pemasukan = DB::table('transaksi')
+                    ->where('status_pembayaran','=','lunas')
+                    ->join('subtotal','transaksi.id','=','subtotal.transaksi_id')
+                    ->sum('subtotal.total_harga');
+
+        return view('layouts.admin.laporan.all',compact('tm','totalPengeluaran','pemasukan'));
     }
 
     public function laporanAll(){

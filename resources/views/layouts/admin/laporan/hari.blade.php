@@ -1,12 +1,22 @@
 @extends('master')
 @section('content')
-
+<div class="col-lg-12">
+  <div class="card p-4 mb-5">
+      <div class="card-body">
+          <div class="d-flex justify-content-between gap-4">
+              <h5 class="mb-3">Transaksi Masuk : {{ $tm }}</h5>
+              <h5 class="mb-3"> Perkiraan Pengeluaran : @currency($totalPengeluaran)</h5>
+              <h5 class="mb-3"> Perkiraan Uang Didapat : @currency($pemasukan)</h5>
+          </div>
+      </div>
+  </div>
+</div>
 <div class="col-lg-12">
   <div class="card p-4">
       <div class="card-body">
-          <div class="card-title">
-              <h5>Tabel Laporan Bulanan</h5>
-          </div>
+        <div class="card-title">
+          <h5>Tabel Laporan Hari</h5>
+      </div>
         <table class="table table-striped"  id="myTable" width="100%">
             <thead>
               <tr>
