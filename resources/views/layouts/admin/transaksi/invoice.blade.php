@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+  <link rel="stylesheet" href="{{ asset('assets/papperCss/paper.css') }}">
 
   <link rel="stylesheet" href="{{ asset('assets/css/paper.css') }}">
 

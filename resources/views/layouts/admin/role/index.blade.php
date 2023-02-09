@@ -90,7 +90,7 @@
 @endsection
 
 @push('js')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ asset("assets/sweetAlert/sweetalert.min.js") }}"></script>
 <script>
 function confirmDelete(data_id) {
   swal({

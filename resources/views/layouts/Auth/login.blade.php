@@ -10,7 +10,7 @@
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css.css') }}">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -39,7 +39,7 @@
               <form class="pt-3" action="{{ route('autentikasi') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg @error('email')
+                  <input type="email" class="form-control form-control-sm @error('email')
                       is-invalid
                   @enderror" id="exampleInputEmail1" placeholder="Username" name="email" autocomplete="off">
                   @error('email')
@@ -49,7 +49,7 @@
                   @enderror
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" autocomplete="off">
+                  <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password" name="password" autocomplete="off">
                 </div>
                 <div class="mt-3 d-flex justify-content-end">
                   <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Log In</button>
@@ -65,16 +65,16 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="{{ asset('assets/') }}vendors/js/vendor.bundle.base.js"></script>
+  <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="{{ asset('assets/') }}js/off-canvas.js"></script>
-  <script src="{{ asset('assets/') }}js/hoverable-collapse.js"></script>
-  <script src="{{ asset('assets/') }}js/template.js"></script>
-  <script src="{{ asset('assets/') }}js/settings.js"></script>
-  <script src="{{ asset('assets/') }}js/todolist.js"></script>
+  <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+  <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('assets/js/template.js') }}"></script>
+  <script src="{{ asset('assets/js/settings.js') }}"></script>
+  <script src="{{ asset('assets/js/todolist.js') }}"></script>
   <!-- endinject -->
 </body>
 

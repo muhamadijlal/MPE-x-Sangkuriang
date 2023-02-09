@@ -75,7 +75,7 @@
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
             <form action="{{ route('logout') }}" method="POST">
               @csrf
-              <button type="submit" class="btn btn-light">
+              <button type="submit" class="btn btn-light w-100">
                 <a class="dropdown-item" type="button">
                   <i class="ti-power-off text-primary"></i>
                   Logout
