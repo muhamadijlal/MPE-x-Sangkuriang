@@ -32,7 +32,7 @@
 </div>
 @endsection
 @push('js')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('assets/npm/chart.js') }}"></script>
 
 <script type="text/javascript">
   const ctx = document.getElementById('myChart');
