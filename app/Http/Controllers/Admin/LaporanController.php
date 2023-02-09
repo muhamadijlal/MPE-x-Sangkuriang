@@ -165,6 +165,7 @@ class LaporanController extends Controller
                         ->get();
 
         return datatables()->of($dataTransaksi)
+                            ->addIndexColumn()
                             ->addColumn('','')
                             ->addColumn('total_harga', function($dataTransaksi){
                                 return format_uang($dataTransaksi->total_harga);
