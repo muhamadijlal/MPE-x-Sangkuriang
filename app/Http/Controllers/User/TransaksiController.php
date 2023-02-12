@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Transaksi;
-use App\Models\Sparepart;
-use App\Models\T_Sparepart;
-use App\Models\Jasa;
-use App\Models\Consumable;
-use App\Models\T_Jasa;
-use App\Models\Karyawan;
-use App\Models\T_Karyawan;
-use App\Models\Subtotal;
-use App\Models\Kwitansi;
 use App\Http\Controllers\Controller;
+use App\Models\Consumable;
+use App\Models\Jasa;
+use App\Models\Karyawan;
+use App\Models\Kwitansi;
+use App\Models\Sparepart;
+use App\Models\Subtotal;
+use App\Models\T_jasa;
+use App\Models\T_Karyawan;
+use App\Models\T_sparepart;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -58,6 +58,7 @@ class TransaksiController extends Controller
     }
 
     public function store(Request $request){
+
         $request->validate([
             'nama' => ['required'],
             'penanggung_jawab' => ['required'],
@@ -76,6 +77,36 @@ class TransaksiController extends Controller
             'jasa.*' => ['required'],
             'qtyJasa.*' => ['required','numeric'],
         ]);
+
+        $jasa = $request["jasa"];
+        $karyawan = $request["karyawan"];
+        $spareparts = $request["sparepart"];
+        $qtySparepart = $request["qtySparepart"];
+        $hasDuplicates = count($spareparts) > count(array_unique($spareparts));
+        $karyawanDuplicate = count($karyawan) > count(array_unique($karyawan));
+        $jasaDuplicate = count($jasa) > count(array_unique($jasa));
+        
+        if($karyawanDuplicate){
+            return redirect()->route('user.transaksi.create')->withErrors('karyawan tidak boleh diuplikat!');
+        }
+
+        if($jasaDuplicate){
+            return redirect()->route('user.transaksi.create')->withErrors('Jasa tidak boleh diuplikat!');
+        }
+
+        foreach($request["sparepart"] as $sparepart){
+            $qty[] = DB::table('sparepart')->select('id','qty')->where('id', $sparepart)->first();
+        }
+
+        if($hasDuplicates){
+            return redirect()->route('user.transaksi.create')->withErrors('Sparepart tidak boleh diuplikat!');
+        }else{
+            for($i = 0; $i < count($qtySparepart); $i++){
+                if($qty[$i]->qty < intVal($qtySparepart[$i])){
+                    return redirect()->route('user.transaksi.create')->withErrors('stok sparepart kurang!');
+                }
+            }
+        }
 
         $id = Transaksi::latest()->get();
 
@@ -158,6 +189,11 @@ class TransaksiController extends Controller
             'total_harga' => $total_harga_transaksi
         ]);
 
+        for($i = 0; $i < count($qty); $i++){
+            Sparepart::where('id', $qty[$i]->id)->update([
+                'qty' => intval($qty[$i]->qty) - intval($qtySparepart[$i])
+            ]);
+        }
 
         return redirect()->route('user.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }
@@ -171,6 +207,7 @@ class TransaksiController extends Controller
         $request->validate([
             'status_pembayaran' => ['required'],
             'status_pengerjaan' => ['required'],
+            'potongan_harga' => ['numeric'],
             'filename' => ['max:1000','mimes:jpg,png,jpeg']
         ]);
 
@@ -179,10 +216,16 @@ class TransaksiController extends Controller
             'status_pengerjaan' => $request->status_pengerjaan,
         ]);
 
+        if($request->has('potongan_harga')){
+            DB::table('subtotal')->where('id', $id)->update([
+                'potongan_harga' => $request->potongan_harga,
+            ]);
+        }
+
         if($request->has('file')){
             $file = $request->file('file');
             $filename = date('YmdHis').str_replace(" ","_", $file->getClientOriginalName());
-            $request->file->move('bukti_vaksin',$filename);
+            $request->file->move('bukti_pembayaran',$filename);
 
             Kwitansi::create([
                 'transaksi_id' => $id,

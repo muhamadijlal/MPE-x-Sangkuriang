@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+  <link rel="stylesheet" href="{{ asset('assets/papperCss/paper.css') }}">
 
   <link rel="stylesheet" href="{{ asset('assets/css/paper.css') }}">
 
@@ -120,7 +120,8 @@
             <td class="rincian qty">{{ $item->qty }}</td>
             <td class="rincian satuan">{{ $item->satuan }}</td>
             <td class="rincian nominal">@currency($item->harga)</td>
-            <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_consumable)</td>
+            {{-- <td class="rincian nominal">@currency($transaksi->subtotal->total_harga_consumable)</td> --}}
+            <td class="rincian nominal">@currency(floatval($item->qty)*floatval($item->harga))</td>
           </tr>
           @endforeach
           <tr>
@@ -158,8 +159,12 @@
             <td class="rincian empty"></td>
           </tr>
           <tr>
+            <td colspan="5">Potongan harga</td>
+            <td class="rincian nominal">@currency($transaksi->subtotal->potongan_harga)</td>
+          </tr>
+          <tr>
             <td colspan="5" class="footer">GRAND TOTAL</td>
-            <td class="rincian nominal">@currency($transaksi->subtotal->total_harga)</td>
+            <td class="rincian nominal">@currency(floatval($transaksi->subtotal->total_harga)-floatval($transaksi->subtotal->potongan_harga))</td>
           </tr>
         </tbody>
       </table>

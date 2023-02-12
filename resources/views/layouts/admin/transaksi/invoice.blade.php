@@ -159,8 +159,12 @@
             <td class="rincian empty"></td>
           </tr>
           <tr>
+            <td colspan="5">Potongan harga</td>
+            <td class="rincian nominal">@currency($transaksi->subtotal->potongan_harga)</td>
+          </tr>
+          <tr>
             <td colspan="5" class="footer">GRAND TOTAL</td>
-            <td class="rincian nominal">@currency($transaksi->subtotal->total_harga)</td>
+            <td class="rincian nominal">@currency(floatval($transaksi->subtotal->total_harga)-floatval($transaksi->subtotal->potongan_harga))</td>
           </tr>
         </tbody>
       </table>

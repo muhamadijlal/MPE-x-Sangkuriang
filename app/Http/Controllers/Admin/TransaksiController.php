@@ -13,11 +13,8 @@ use App\Models\T_jasa;
 use App\Models\T_Karyawan;
 use App\Models\T_sparepart;
 use App\Models\Transaksi;
-use Facade\FlareClient\Http\Exceptions\InvalidData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isNan;
 
 class TransaksiController extends Controller
 {
@@ -210,6 +207,7 @@ class TransaksiController extends Controller
         $request->validate([
             'status_pembayaran' => ['required'],
             'status_pengerjaan' => ['required'],
+            'potongan_harga' => ['numeric'],
             'filename' => ['max:1000','mimes:jpg,png,jpeg']
         ]);
 
@@ -218,10 +216,16 @@ class TransaksiController extends Controller
             'status_pengerjaan' => $request->status_pengerjaan,
         ]);
 
+        if($request->has('potongan_harga')){
+            DB::table('subtotal')->where('id', $id)->update([
+                'potongan_harga' => $request->potongan_harga,
+            ]);
+        }
+
         if($request->has('file')){
             $file = $request->file('file');
             $filename = date('YmdHis').str_replace(" ","_", $file->getClientOriginalName());
-            $request->file->move('bukti_vaksin',$filename);
+            $request->file->move('bukti_pembayaran',$filename);
 
             Kwitansi::create([
                 'transaksi_id' => $id,

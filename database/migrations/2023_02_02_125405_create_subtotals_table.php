@@ -20,6 +20,7 @@ class CreateSubtotalsTable extends Migration
             $table->string('total_harga_sparepart');
             $table->string('total_harga_jasa');
             $table->string('total_harga_consumable');
+            $table->string('potongan_harga')->nullable();
             $table->string('total_harga');
             $table->timestamps();
         });

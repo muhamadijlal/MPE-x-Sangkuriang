@@ -10,13 +10,13 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4">
-        <div class="card p-4">
-            <div class="card-body">
-                <h4 class="card-title">Form Approvement</h4>
-                <form class="forms-sample mt-5" action="{{ route('user.transaksi.approvementStore', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
+    @if($transaksi->status_pembayaran != 'lunas')
+        <div class="col-lg-4">
+            <div class="card p-4">
+                <div class="card-body">
+                    <h4 class="card-title">Form Approvement</h4>
+                    <form class="forms-sample mt-5" action="{{ route('user.transaksi.approvementStore', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label for="status_pembayaran">Status Pembayaran </label>
                             <select class="form-control form-control-sm @error('status_pembayaran')
@@ -33,8 +33,6 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group">
                         <div class="form-group">
                             <label for="status_pengerjaan">Status Pengerjaan</label>
                             <select class="form-control form-control-sm @error('status_pengerjaan')
@@ -51,20 +49,31 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Upload bukti</label>
-                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <div class="my-5 float-end">
-                        <button type="reset" class="btn btn-light">Cancel</button>
-                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="potongan_harga">Potongan harga</label>
+                            <input name="potongan_harga" type="text" class="form-control form-control-sm @error('potongan_harga')
+                                is-invalid
+                            @enderror" id="potongan_harga" placeholder="Input Potongan Harga">
+                            @error('potongan_harga')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Upload bukti</label>
+                            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                        <div class="my-5 float-end">
+                            <button type="reset" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-8">
+    @endif
+    <div class="col-lg">
         <div class="card p-4">
             <div class="card-body">
                 <div class="card-title">
@@ -104,15 +113,31 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Total Harga :</th>
+                        <th>Potongan Harga :</th>
+                        <td class="text-end">@currency($transaksi->subtotal->potongan_harga)</td>
+                    </tr>
+                    <tr>
+                        <th>Subtotal :</th>
                         <td class="text-end">@currency($transaksi->subtotal->total_harga)</td>
+                    </tr>
+                    <tr>
+                        <th>Total Harga :</th>
+                        <td class="text-end">@currency(floatval($transaksi->subtotal->total_harga)-floatval($transaksi->subtotal->potongan_harga))</td>
                     </tr>
                 </table>
             </div>
-            <a href="{{ route('user.transaksi.invoice', $transaksi->id) }}" class="btn btn-outline-info btn-icon-text">
-                Print
-                <i class="ti-printer btn-icon-append"></i>                                                                              
-            </a>
+            <div class="row gap-5 mx-4">
+                @if($transaksi->kwitansi != null)
+                <a href="{{ asset('bukti_pembayaran/'.$transaksi->kwitansi->filename) }}" class="btn btn-outline-success btn-icon-text col-6" target="_blank">
+                    Lihat bukti pembayaran
+                    <i class="ti-file btn-icon-append"></i>
+                </a>
+                @endif
+                <a href="{{ route('user.transaksi.invoice', $transaksi->id) }}" class="btn btn-outline-info btn-icon-text col">
+                    Print
+                    <i class="ti-printer btn-icon-append"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
