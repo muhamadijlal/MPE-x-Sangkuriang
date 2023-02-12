@@ -19,7 +19,7 @@ class CreateTSparepartsTable extends Migration
             $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->unsignedBigInteger('sparepart_id');
             $table->foreign('sparepart_id')->references('id')->on('sparepart');
-            $table->tinyInteger('qty');
+            $table->integer('qty');
             $table->timestamps();
         });
     }

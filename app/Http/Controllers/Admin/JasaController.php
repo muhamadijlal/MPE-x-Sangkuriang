@@ -45,17 +45,19 @@ class JasaController extends Controller
             [
                 'nama' => 'required',
                 'keterangan' => 'required',
+                'satuan' => 'required',
                 'harga' => 'required'
             ]
         );
         DB::table('jasa')->insert([
             'nama' => $validation['nama'],
             'deskripsi' => $validation['keterangan'],
+            'satuan' => $validation['satuan'],
             'harga' => $validation['harga'],
             'created_at' => Carbon::now()
         ]);
+
         return redirect('/admin/jasa')->with('success','Data Berhasil Ditambahkan');
-        
     }
 
     public function edit($id){
@@ -68,6 +70,7 @@ class JasaController extends Controller
         DB::table('jasa')->where('id',$id)->update([
             'nama' => $request['nama'],
             'deskripsi' => $request['keterangan'],
+            'satuan' => $request['satuan'],
             'harga' => $request['harga'],
             'updated_at' => Carbon::now()
         ]);

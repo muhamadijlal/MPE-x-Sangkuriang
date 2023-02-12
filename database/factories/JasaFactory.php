@@ -30,7 +30,6 @@ class JasaFactory extends Factory
         return [
             'nama'=> $this->faker->randomElement($jasa),
             'deskripsi'=> $this->faker->sentence(20, true),
-            'qty'=> $this->faker->numberBetween(1,99),
             'satuan'=> $this->faker->randomElement(['lot','pcs','can']),
             'harga'=> $this->faker->numberBetween(999999, 999999999)
         ];

@@ -13,6 +13,7 @@ use App\Models\T_jasa;
 use App\Models\T_Karyawan;
 use App\Models\T_sparepart;
 use App\Models\Transaksi;
+use Facade\FlareClient\Http\Exceptions\InvalidData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,6 +61,7 @@ class TransaksiController extends Controller
     }
 
     public function store(Request $request){
+
         $request->validate([
             'nama' => ['required'],
             'penanggung_jawab' => ['required'],
@@ -78,6 +80,36 @@ class TransaksiController extends Controller
             'jasa.*' => ['required'],
             'qtyJasa.*' => ['required','numeric'],
         ]);
+
+        $jasa = $request["jasa"];
+        $karyawan = $request["karyawan"];
+        $spareparts = $request["sparepart"];
+        $qtySparepart = $request["qtySparepart"];
+        $hasDuplicates = count($spareparts) > count(array_unique($spareparts));
+        $karyawanDuplicate = count($karyawan) > count(array_unique($karyawan));
+        $jasaDuplicate = count($jasa) > count(array_unique($jasa));
+        
+        if($karyawanDuplicate){
+            return redirect()->route('admin.transaksi.create')->withErrors('karyawan tidak boleh diuplikat!');
+        }
+
+        if($jasaDuplicate){
+            return redirect()->route('admin.transaksi.create')->withErrors('Jasa tidak boleh diuplikat!');
+        }
+
+        foreach($request["sparepart"] as $sparepart){
+            $qty[] = DB::table('sparepart')->select('id','qty')->where('id', $sparepart)->first();
+        }
+
+        if($hasDuplicates){
+            return redirect()->route('admin.transaksi.create')->withErrors('Sparepart tidak boleh diuplikat!');
+        }else{
+            for($i = 0; $i < count($qtySparepart); $i++){
+                if($qty[$i]->qty < intVal($qtySparepart[$i])){
+                    return redirect()->route('admin.transaksi.create')->withErrors('stok sparepart kurang!');
+                }
+            }
+        }
 
         $id = Transaksi::latest()->get();
 
@@ -159,6 +191,12 @@ class TransaksiController extends Controller
             'total_harga_consumable' => $total_harga_consume[0]->total_harga_consume,
             'total_harga' => $total_harga_transaksi
         ]);
+
+        for($i = 0; $i < count($qty); $i++){
+            Sparepart::where('id', $qty[$i]->id)->update([
+                'qty' => intval($qty[$i]->qty) - intval($qtySparepart[$i])
+            ]);
+        }
 
         return redirect()->route('admin.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }

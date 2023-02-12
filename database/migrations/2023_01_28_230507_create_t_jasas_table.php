@@ -19,7 +19,7 @@ class CreateTJasasTable extends Migration
             $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->foreign('jasa_id')->references('id')->on('jasa');
             $table->foreignId('jasa_id');
-            $table->tinyInteger('qty');
+            $table->integer('qty');
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateConsumablesTable extends Migration
             $table->unsignedBigInteger('transaksi_id');
             $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->string('nama');
-            $table->tinyInteger('qty');
+            $table->integer('qty');
             $table->string('satuan');
             $table->integer('harga');
             $table->timestamps();

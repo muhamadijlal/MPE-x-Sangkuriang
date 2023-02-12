@@ -32,6 +32,17 @@
           @enderror
         </div>
         <div class="form-group">
+          <label for="satuan">Satuan Jasa</label>
+          <input name="satuan" type="text" class="form-control form-control-sm @error('satuan')
+            is-invalid
+          @enderror" id="satuan" placeholder="Input satuan Jasa" value="{{ $item->satuan }}">
+          @error('satuan')
+            <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        </div>
+        <div class="form-group">
           <label for="harga">Harga Jasa</label>
           <input name="harga" type="number" class="form-control form-control-sm @error('harga')
             is-invalid
