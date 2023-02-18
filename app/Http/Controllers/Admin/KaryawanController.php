@@ -19,7 +19,8 @@ class KaryawanController extends Controller
                 ->of($collections)
                 ->addColumn('','')
                 ->addColumn('role', function($row){
-                    return $row->role->jenis;
+                    // return $row->role->jenis;
+                    return $row->role ? $row->role->jenis : '';
                 })
                 ->addColumn('aksi', function($row){
                     return '

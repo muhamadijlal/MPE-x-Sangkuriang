@@ -14,6 +14,6 @@ class Role extends Model
     protected $fillable = ['jenis','upah','keterangan'];
 
     protected function karyawan(){
-        return $this->hasMany(Karyawan::class, 'role_id');
+        return $this->hasMany(Karyawan::class, 'id');
     }
 }

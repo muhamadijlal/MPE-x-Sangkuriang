@@ -13,7 +13,7 @@ class Karyawan extends Model
     protected $fillable = ['role_id','nama','alamat','telepon'];
 
     protected function role(){
-        return $this->belongsTo(Role::class, 'id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     protected function t_karyawan(){
