@@ -22,7 +22,7 @@ class UserMiddleware
         }
         else
         {
-            return abort(403);
+            return view('Handler.403');
         }
     }
 }

@@ -20,7 +20,7 @@ class KaryawanController extends Controller
                 ->addColumn('','')
                 ->addColumn('role', function($row){
                     // return $row->role->jenis;
-                    return $row->role ? $row->role->jenis : '';
+                    return $row->role ? $row->role->jenis : 'Role karyawan tidak ditemukan';
                 })
                 ->addColumn('aksi', function($row){
                     return '

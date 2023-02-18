@@ -13,7 +13,6 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::redirect('/','/login');
 
 Route::middleware(['revalidate','auth'])->group(function(){
@@ -162,5 +161,5 @@ Route::middleware('guest')->group(function(){
 
 // Let it stay below
 Route::fallback(function(){
-    return abort(404);
+    return view('Handler.404');
 });
