@@ -207,7 +207,7 @@ class TransaksiController extends Controller
         $request->validate([
             'status_pembayaran' => ['required'],
             'status_pengerjaan' => ['required'],
-            'potongan_harga' => ['numeric'],
+            // 'potongan_harga' => ['numeric'],
             'filename' => ['max:1000','mimes:jpg,png,jpeg']
         ]);
 
