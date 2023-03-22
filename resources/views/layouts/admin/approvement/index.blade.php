@@ -136,10 +136,16 @@
                     <i class="ti-printer btn-icon-append"></i>
                 </a>
             </div>
-            <a href="{{ route('admin.operasional.create', $transaksi->id) }}" class="btn btn-outline-primary btn-icon-text col mx-4 mt-3">
-                Input biaya operasional
-                <i class="ti-plus btn-icon-append"></i>
-            </a>
+            <div class="row gap-2 mx-4">
+                <a href="{{ route('admin.operasional.create', $transaksi->id) }}" class="btn btn-outline-primary btn-icon-text col mt-3">
+                    Input biaya operasional
+                    <i class="ti-plus btn-icon-append"></i>
+                </a>
+                <a href="{{ route('admin.karyawan.gaji.detail', $transaksi->id) }}" class="btn btn-outline-primary btn-icon-text col mt-3">
+                    Detail gaji karyawan
+                    <i class="ti-plus btn-icon-append"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>

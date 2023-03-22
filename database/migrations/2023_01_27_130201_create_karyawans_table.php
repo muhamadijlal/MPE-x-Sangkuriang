@@ -15,7 +15,8 @@ class CreateKaryawansTable extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('role');
             $table->string('nama');
             $table->string('alamat');
             $table->string('telepon');

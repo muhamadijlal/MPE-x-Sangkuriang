@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Karyawan;
 use App\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Transaksi;
+use App\Models\T_Karyawan;
 use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
@@ -92,5 +94,12 @@ class KaryawanController extends Controller
         $karyawan->delete();
 
         return redirect()->route('admin.karyawan.index')->with('success','Karyawan berhasil didelete!');
+    }
+
+    public function detail($id)
+    {
+        $karyawan = T_Karyawan::where('transaksi_id',$id)->get();
+        $transaksi = Transaksi::findOrFail($id);
+        return view('layouts.admin.karyawan.detail', compact('karyawan','transaksi'));
     }
 }

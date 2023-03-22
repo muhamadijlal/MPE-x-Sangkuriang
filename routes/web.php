@@ -103,6 +103,9 @@ Route::middleware(['revalidate','auth'])->group(function(){
             Route::get('/karyawan/edit/{id}','edit')->name('edit');
             Route::put('/karyawan/update/{id}','update')->name('update');
             Route::get('/karyawan/delete/{id}','destroy')->name('destroy');
+
+            // Detail gaji karayawan
+            Route::get('/karyawan/detail/gaji/{id}', 'detail')->name('gaji.detail');
         });
         
         Route::group([
@@ -120,7 +123,7 @@ Route::middleware(['revalidate','auth'])->group(function(){
             Route::get('/laporan/{id}','detail')->name('detail');
         });
 
-        // Biaaya operasional route's
+        // Biaya operasional route's
         Route::group([
             'namespace' => 'App\Http\Controllers\Admin',
             'controller' => OperasionalController::class,
