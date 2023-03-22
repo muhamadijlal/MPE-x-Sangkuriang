@@ -119,6 +119,20 @@ Route::middleware(['revalidate','auth'])->group(function(){
             Route::get('/laporan/all/datatable','laporanAll')->name('datatableAll');
             Route::get('/laporan/{id}','detail')->name('detail');
         });
+
+        // Biaaya operasional route's
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Admin',
+            'controller' => OperasionalController::class,
+            'prefix' => 'admin',
+            'as' => 'admin.operasional.'
+        ],  function(){
+            Route::get('/operasional','index')->name('index');
+            Route::get('/operasional/datatable','datatable')->name('datatable');
+            Route::get('/operasional/create/{id}','create')->name('create');
+            Route::post('/operasional/store/{id}','store')->name('store');
+            Route::get('/operasional/detail/{id}','detail')->name('detail');
+        });
     });
 
     // User Middleware

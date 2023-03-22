@@ -29,6 +29,7 @@
             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.jasa.index') }}">Jasa</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.role.index') }}">Role</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.karyawan.index') }}">Karyawan</a></li>
+            {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('admin.operasional.index') }}">Operasional</a></li> --}}
             @endif
           </ul>
         </div>

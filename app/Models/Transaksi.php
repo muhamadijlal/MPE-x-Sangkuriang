@@ -33,6 +33,11 @@ class Transaksi extends Model
     }
 
     public function kwitansi(){
-        return $this->hasOne(Kwitansi::class, 'transaksi_id');
+        return $this->hasOne(Kwitansi::class, 'id');
+    }
+
+    // transaksi hasMany Operasional
+    public function operasional(){
+        return $this->hasMany(Operasional::class, 'id');
     }
 }

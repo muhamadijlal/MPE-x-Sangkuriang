@@ -124,7 +124,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="row gap-5 mx-4">
+            <div class="row gap-3 mx-4">
                 @if($transaksi->kwitansi != null)
                 <a href="{{ asset('bukti_pembayaran/'.$transaksi->kwitansi->filename) }}" class="btn btn-outline-success btn-icon-text col-6" target="_blank">
                     Lihat bukti pembayaran
@@ -136,6 +136,10 @@
                     <i class="ti-printer btn-icon-append"></i>
                 </a>
             </div>
+            <a href="{{ route('admin.operasional.create', $transaksi->id) }}" class="btn btn-outline-primary btn-icon-text col mx-4 mt-3">
+                Input biaya operasional
+                <i class="ti-plus btn-icon-append"></i>
+            </a>
         </div>
     </div>
 </div>
