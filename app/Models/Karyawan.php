@@ -17,6 +17,6 @@ class Karyawan extends Model
     }
 
     protected function t_karyawan(){
-        return $this->hasMany(T_Karyawan::class, 'karyawan_id');
+        return $this->hasMany(T_Karyawan::class, 'id');
     }
 }

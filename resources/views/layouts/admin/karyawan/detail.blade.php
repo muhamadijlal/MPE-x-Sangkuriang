@@ -25,7 +25,7 @@
               <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->karyawan->nama }}</td>
-                <td>{{ $item->karyawan->role->upah }}</td>
+                <td>{{ $item->karyawan->role->upah }} %</td>
                 <td>{{ format_uang(($transaksi->subtotal->total_harga * $item->karyawan->role->upah) / 100) }}</td>
               </tr>
               @endforeach

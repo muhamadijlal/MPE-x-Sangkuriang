@@ -68,12 +68,12 @@ class TransaksiController extends Controller
             'status_pengerjaan' => ['in:pending, proses, selesai'],
             'tanggal' => ['required'],
             'karyawan.*' => ['required'],
-            'sparepart.*' => ['required'],
-            'qtySparepart.*' => ['required','numeric'],
-            'consumable.*' => ['required'],
-            'qtyConsumable.*' => ['required','numeric'],
-            'satuanConsumable.*' => ['required','string'],
-            'hargaConsumable.*' => ['required','numeric'],
+            'sparepart.*' => ['nullable'],
+            'qtySparepart.*' => ['nullable','numeric'],
+            'consumable.*' => ['nullable'],
+            'qtyConsumable.*' => ['nullable','numeric'],
+            'satuanConsumable.*' => ['nullable','string'],
+            'hargaConsumable.*' => ['nullable','numeric'],
             'jasa.*' => ['required'],
             'qtyJasa.*' => ['required','numeric'],
         ]);
@@ -85,7 +85,7 @@ class TransaksiController extends Controller
         $hasDuplicates = count($spareparts) > count(array_unique($spareparts));
         $karyawanDuplicate = count($karyawan) > count(array_unique($karyawan));
         $jasaDuplicate = count($jasa) > count(array_unique($jasa));
-        
+
         if($karyawanDuplicate){
             return redirect()->route('admin.transaksi.create')->withErrors('karyawan tidak boleh diuplikat!');
         }
@@ -100,7 +100,9 @@ class TransaksiController extends Controller
 
         if($hasDuplicates){
             return redirect()->route('admin.transaksi.create')->withErrors('Sparepart tidak boleh diuplikat!');
-        }else{
+        }
+        elseif($spareparts[0] != null)
+        {
             for($i = 0; $i < count($qtySparepart); $i++){
                 if($qty[$i]->qty < intVal($qtySparepart[$i])){
                     return redirect()->route('admin.transaksi.create')->withErrors('stok sparepart kurang!');
@@ -127,22 +129,49 @@ class TransaksiController extends Controller
             ]);
         }
 
-        for ($i = 0; $i < count($request->sparepart); $i++) {
-            T_sparepart::create([
-                'transaksi_id' => $id,
-                'sparepart_id' => $request->sparepart[$i],
-                'qty' => $request->qtySparepart[$i],
-            ]);
+        if($request->sparepart[0] != null){
+            for ($i = 0; $i < count($request->sparepart); $i++) {
+                T_sparepart::create([
+                    'transaksi_id' => $id,
+                    'sparepart_id' => $request->sparepart[$i],
+                    'qty' => $request->qtySparepart[$i],
+                ]);
+            }
+
+            $total_harga_sparepart = DB::table('transaksi')
+                ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
+                ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
+                ->select(
+                    DB::raw('sum(t_sparepart.qty*sparepart.harga) as total_harga_sparepart')
+                )
+                ->where('transaksi.id', $id)
+                ->get();
+
+            for($i = 0; $i < count($qty); $i++){
+                Sparepart::where('id', $qty[$i]->id)->update([
+                    'qty' => intval($qty[$i]->qty) - intval($qtySparepart[$i])
+                ]);
+            }
         }
 
-        for ($i = 0; $i < count($request->consumable); $i++) {
-            Consumable::create([
-                'transaksi_id' => $id,
-                'nama' => $request->consumable[$i],
-                'qty' => $request->qtyConsumable[$i],
-                'satuan' => $request->satuanConsumable[$i],
-                'harga' => $request->hargaConsumable[$i],
-            ]);
+        if($request->consumable[0] != null){
+            for ($i = 0; $i < count($request->consumable); $i++) {
+                Consumable::create([
+                    'transaksi_id' => $id,
+                    'nama' => $request->consumable[$i],
+                    'qty' => $request->qtyConsumable[$i],
+                    'satuan' => $request->satuanConsumable[$i],
+                    'harga' => $request->hargaConsumable[$i],
+                ]);
+            }
+
+            $total_harga_consume = DB::table('transaksi')
+                        ->join('consumable','transaksi.id','=','consumable.transaksi_id')
+                        ->select(
+                            DB::raw('sum(consumable.qty*consumable.harga) as total_harga_consume')
+                        )
+                        ->where('transaksi.id', $id)
+                        ->get();
         }
 
         for ($i = 0; $i < count($request->jasa); $i++) {
@@ -153,15 +182,6 @@ class TransaksiController extends Controller
             ]);
         }
 
-        $total_harga_sparepart = DB::table('transaksi')
-                        ->join('t_sparepart','transaksi.id','=','t_sparepart.transaksi_id')
-                        ->join('sparepart','t_sparepart.sparepart_id','=','sparepart.id')
-                        ->select(
-                            DB::raw('sum(t_sparepart.qty*sparepart.harga) as total_harga_sparepart')
-                        )
-                        ->where('transaksi.id', $id)
-                        ->get();
-
         $total_harga_jasa = DB::table('transaksi')
                         ->join('t_jasa','transaksi.id','=','t_jasa.transaksi_id')
                         ->join('jasa','t_jasa.jasa_id','=','jasa.id')
@@ -171,29 +191,15 @@ class TransaksiController extends Controller
                         ->where('transaksi.id', $id)
                         ->get();
 
-        $total_harga_consume = DB::table('transaksi')
-                        ->join('consumable','transaksi.id','=','consumable.transaksi_id')
-                        ->select(
-                            DB::raw('sum(consumable.qty*consumable.harga) as total_harga_consume')
-                        )
-                        ->where('transaksi.id', $id)
-                        ->get();
-
-        $total_harga_transaksi = $total_harga_consume[0]->total_harga_consume+$total_harga_jasa[0]->total_harga_jasa+$total_harga_sparepart[0]->total_harga_sparepart;
+        $total_harga_transaksi = ($total_harga_consume[0]->total_harga_consume ?? 0) + ($total_harga_jasa[0]->total_harga_jasa ?? 0) + ($total_harga_sparepart[0]->total_harga_sparepart ?? 0);
 
         Subtotal::create([
             'transaksi_id' => $id,
-            'total_harga_sparepart' => $total_harga_sparepart[0]->total_harga_sparepart,
-            'total_harga_jasa' => $total_harga_jasa[0]->total_harga_jasa,
-            'total_harga_consumable' => $total_harga_consume[0]->total_harga_consume,
+            'total_harga_sparepart' => $total_harga_sparepart[0]->total_harga_sparepart ?? 0,
+            'total_harga_jasa' => $total_harga_jasa[0]->total_harga_jasa ?? 0,
+            'total_harga_consumable' => $total_harga_consume[0]->total_harga_consume ?? 0,
             'total_harga' => $total_harga_transaksi
         ]);
-
-        for($i = 0; $i < count($qty); $i++){
-            Sparepart::where('id', $qty[$i]->id)->update([
-                'qty' => intval($qty[$i]->qty) - intval($qtySparepart[$i])
-            ]);
-        }
 
         return redirect()->route('admin.transaksi.index')->with('success','Transaksi berhasil dibuat!');
     }

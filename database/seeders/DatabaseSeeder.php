@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Sparepart::factory(5)->create();
-        Role::factory(5)->create();
-        Karyawan::factory(5)->create();
+        // Sparepart::factory(5)->create();
+        Role::factory(3)->create();
+        Karyawan::factory(3)->create();
         // Transaksi::factory(1)->create();
-        Jasa::factory(1)->create();
+        Jasa::factory(3)->create();
         // T_Jasa::factory(5)->create();
         // T_sparepart::factory(20)->create();
         // Subtotal::factory(20)->create();

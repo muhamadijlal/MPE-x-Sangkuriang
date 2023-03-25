@@ -17,6 +17,6 @@ class T_Karyawan extends Model
     }
 
     protected function karyawan(){
-        return $this->belongsTo(Karyawan::class, 'id');
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
     }
 }
